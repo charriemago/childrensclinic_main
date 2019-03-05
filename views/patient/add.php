@@ -144,15 +144,16 @@
                             <div class="col-sm-3">
                                 <input required type="text" class="form-control" name="abdominal_circumference" placeholder="cm">
                             </div>
-                             <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis Notes</label>
-                            <div class="col-sm-3">
+                        </div> 
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis Notes</label>
+                            <div class="col-sm-5">
                                 <input required type="text" class="form-control" name="diagnosis_notes">
                             </div>
                              <label for="inputPassword" class="col-sm-1 col-form-label">Medication Notes</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-5">
                                 <input required type="text" class="form-control" name="medication_notes">
                             </div>
-                        </div> 
                         </div> 
                         <h6 class="mb-4 mt-5" style="font-weight: 700">Immunization Record</h6>
                         <div class="table-responsive">

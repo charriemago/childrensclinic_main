@@ -93,17 +93,19 @@ class Patient_model extends Model
     public function insertBirthHistory($patientId) {
         $data = array(
             'patient_id' => $patientId,
-            'term' => $_POST['term'],
-            'no_of_mos' => $_POST['no_of_mos'],
-            'weeks' => $_POST['weeks'],
-            'days' => $_POST['days'],
-            'type_of_delivery' => $_POST['type_of_delivery'],
-            'birth_weight' => $_POST['birth_weight'],
-            'birth_length' => $_POST['birth_length'],
-            'blood_type' => $_POST['blood_type'],
-            'head_circumference' => $_POST['head_circumference'],
-            'chest_circumference' => $_POST['chest_circumference'],
-            'abdominal_circumference' => $_POST['abdominal_circumference'],
+            'term' => isset($_POST['term']) ? $_POST['term'] : '',
+            'no_of_mos' => isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '',
+            'weeks' => isset($_POST['weeks']) ? $_POST['weeks'] : '',
+            'days' => isset($_POST['days']) ? $_POST['days'] : '',
+            'type_of_delivery' => isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '',
+            'birth_weight' => isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '',
+            'birth_length' => isset($_POST['birth_length']) ? $_POST['birth_length'] : '',
+            'blood_type' => isset($_POST['blood_type']) ? $_POST['blood_type'] : '',
+            'head_circumference' => isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '',
+            'chest_circumference' => isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '',
+            'abdominal_circumference' => isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '',
+            'diagnosis_notes' => isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '',
+            'medication_notes' => isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '',
             'created_by' => $this->user['id']
         );
         $id = Db::insert(DATABASE_NAME, 'tbl_birth_history', $data);
