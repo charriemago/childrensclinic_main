@@ -10,7 +10,7 @@
         <div class="input-group-prepend input-group-left">
             <button class="btn btn-standard btn-sm btn-export"><i class="pe-7s-print pe-va pe-lg"></i> <span>Export</span></button>
             <a class="btn btn-standard btn-sm" href="<?=URL?>billing/add">
-                <i class="pe-7s-plus pe-va pe-lg"></i> <span>Add Billing</span
+                <i class="pe-7s-plus pe-va pe-lg"></i> <span>Add Payment</span
             ></a>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="box-title clearfix">
                 <div class="float-left">
-                    <h5 class="mb-3 float-left"> Billing List</h5>
+                    <h5 class="mb-3 float-left"> Payment List</h5>
                 </div>
                 <div class="float-right">
                    

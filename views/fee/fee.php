@@ -6,7 +6,7 @@
         <div class="col-md-12 mt-4">
             <div class=" clearfix">
                 <div class="float-left">
-                    <h5 class="float-left"> Doctor's Fee</h5>
+                    <h5 class="float-left"> Consultation's Fee</h5>
                 </div>
                 <div class="float-right">
                     <button class="btn btn-standard-success btn-sm" form="feeBill"><i class="pe-7s-paper-plane pe-lg"></i> <span>Submit</span></button>

@@ -27,7 +27,7 @@
                                         <th>Age</th>                   
                                         <th>Weight</th>                   
                                         <th>Height</th>                   
-                                        <th>Diagnosis and Physician's Notes</th>                                       
+                                        <th>Diagnosis and Physician's Notes</th>                                     
                                     </tr>   
                                 </thead>
                                 <tbody>

@@ -45,7 +45,7 @@
 					<a class="nav-link text-standard" href="<?= URL?>followup">Follow up Visit</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-standard" href="<?= URL?>billing">Billing</a>
+					<a class="nav-link text-standard" href="<?= URL?>billing">Payment</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-standard d-none" href="<?= URL?>sms">SMS</a>
@@ -60,8 +60,9 @@
 					File Maintenance
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="<?= URL?>vaccine">Vaccine</a>
-						<a class="dropdown-item" href="<?= URL?>fee">Doctor's Fee</a>
+						<a class="dropdown-item" href="<?= URL?>vaccine">Vaccines Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee">Consultation Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee">Others Fee</a>
 					</div>
 				</li>
 			</ul>

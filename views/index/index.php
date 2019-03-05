@@ -9,24 +9,24 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('img/background.jpg')">
+        <div class="carousel-item active" style="background-image: url('<?= URL?>public/img/double.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Children's Clinic</h3>
             <p>2nd floor of Carlohan Building A. Bonifacio Corner Emmanuel Quezon Cainta, Rizal</p>
           </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('background.jpg')">
+        <div class="carousel-item" style="background-image: url('<?= URL?>public/img/docduran.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Dr.Angelito T. Duran</h3>
             <p>Pediatrician</p>
           </div>
         </div>
         <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item" style="background-image: url('<?= URL?>public/img/secretary.jpg')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Third Slide</h3>
-            <p>This is a description for the third slide.</p>
+            <h3>Secretary</h3>
+            <p>The Doctor's secretary</p>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
     <h1 class="my-4">Welcome to Children's Clinic</h1>
 
     <!-- Marketing Icons Section -->
-    <div class="row">
+   <!--  <div class="row">
       <div class="col-lg-4 mb-4">
         <div class="card h-100">
           <h4 class="card-header">Card Title</h4>
@@ -81,11 +81,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
     <!-- Portfolio Section -->
-    <h2>Portfolio Heading</h2>
+    <!-- <h2>Clinic</h2>
 
     <div class="row">
       <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -154,11 +154,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
     <!-- Features Section -->
-    <div class="row">
+   <!--  <div class="row">
       <div class="col-lg-6">
         <h2>Modern Business Features</h2>
         <p>The Modern Business template by Start Bootstrap includes:</p>
@@ -176,13 +176,13 @@
       <div class="col-lg-6">
         <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
       </div>
-    </div>
+    </div> -->
     <!-- /.row -->
 
-    <hr>
+   <!--  <hr> -->
 
     <!-- Call to Action Section -->
-    <div class="row mb-4">
+    <!-- <div class="row mb-4">
       <div class="col-md-8">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
       </div>
@@ -191,7 +191,7 @@
       </div>
     </div>
 
-  </div>
+  </div> -->
   <!-- /.container -->
 
   <!-- Footer -->
