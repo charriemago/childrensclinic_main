@@ -23,7 +23,8 @@
                             <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
                                 <thead>
                                     <tr>
-                                        <th>Date</th>                  
+                                        <th>Date Visit</th>
+                                        <th>Date Next Check-up</th>                  
                                         <!-- <th>Age</th>    -->                
                                         <th>Weight</th>                   
                                         <th>Height</th>                   
@@ -33,6 +34,7 @@
                                 <tbody>
                                     <?php foreach ($visit as $key => $v) : ?>
                                         <tr>
+                                            <td><?= date('F d, Y', strtotime($v['date_created']))?></td> 
                                             <td><?= date('F d, Y', strtotime($v['date_created']))?></td>      
                                            <!--  <td><?= $v['age']?></td>   -->    
                                             <td><?= $v['weight']?></td>      
@@ -41,7 +43,8 @@
                                         </tr>
                                     <?php endforeach;?>
                                     <tr>
-                                        <td><input class="form-control" type="date" name="date_visit[]" required="required"></td>      
+                                        <td><input class="form-control" type="date" name="date_visit[]" required="required"></td> 
+                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
                                        <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
                                         <td><input class="form-control" type="text" name="weight[]" required="required"></td>      
                                         <td><input class="form-control" type="text" name="height[]" required="required"></td>      
