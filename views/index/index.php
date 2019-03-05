@@ -9,14 +9,14 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item active" style="background-image: url('img/background.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Children's Clinic</h3>
             <p>2nd floor of Carlohan Building A. Bonifacio Corner Emmanuel Quezon Cainta, Rizal</p>
           </div>
         </div>
         <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item" style="background-image: url('background.jpg')">
           <div class="carousel-caption d-none d-md-block">
             <h3>Dr.Angelito T. Duran</h3>
             <p>Pediatrician</p>
