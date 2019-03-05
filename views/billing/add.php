@@ -8,7 +8,7 @@
         <div class="col-md-12 mt-4">
             <div class=" clearfix">
                 <div class="float-left">
-                    <h5 class="float-left"> Add Bill</h5>
+                    <h5 class="float-left"> Add Payment</h5>
                 </div>
                 <div class="float-right">
                     <button class="btn btn-standard-success btn-sm" form="addForm"><i class="pe-7s-paper-plane pe-lg"></i> <span>Submit</span></button>
@@ -57,22 +57,22 @@
                                             <input type="hidden" class="form-control" name="vaccine[]" value="<?=$vaccine['id']?>">      
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['1st']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['1st']?>">   
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['2nd']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['2nd']?>">   
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['3rd']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['3rd']?>">   
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_1']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_1']?>">   
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_2']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_2']?>">   
                                         </td>
                                         <td>
-                                            <input type="radio" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_3']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_3']?>">   
                                         </td>
                                         <td class="totalVaccineBill">
                                             <input type="hidden" class="inputTotalVaccineBill" value="0">

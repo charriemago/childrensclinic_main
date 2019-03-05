@@ -24,7 +24,7 @@
                                 <thead>
                                     <tr>
                                         <th>Date</th>                  
-                                        <th>Age</th>                   
+                                        <!-- <th>Age</th>    -->                
                                         <th>Weight</th>                   
                                         <th>Height</th>                   
                                         <th>Diagnosis and Physician's Notes</th>                                     
@@ -34,7 +34,7 @@
                                     <?php foreach ($visit as $key => $v) : ?>
                                         <tr>
                                             <td><?= date('F d, Y', strtotime($v['date_created']))?></td>      
-                                            <td><?= $v['age']?></td>      
+                                           <!--  <td><?= $v['age']?></td>   -->    
                                             <td><?= $v['weight']?></td>      
                                             <td><?= $v['height']?></td>      
                                             <td><?= $v['diagnosis_physician_notes']?></td>      
@@ -42,7 +42,7 @@
                                     <?php endforeach;?>
                                     <tr>
                                         <td><input class="form-control" type="date" name="date_visit[]" required="required"></td>      
-                                        <td><input class="form-control" type="number" name="age[]" required="required"></td>      
+                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
                                         <td><input class="form-control" type="text" name="weight[]" required="required"></td>      
                                         <td><input class="form-control" type="text" name="height[]" required="required"></td>      
                                         <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
