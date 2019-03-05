@@ -107,7 +107,10 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-1 col-form-label">Type of Delivery</label>
                             <div class="col-sm-5">
-                                <input required type="text" class="form-control" name="type_of_delivery">
+                                <select required class="form-control" name="typeofdelivery">
+                                    <option value="normal">Normal</option>
+                                    <option value="cesarean">Cesarean</option>
+                                </select>
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Chest Circumference</label>
                             <div class="col-sm-5">
@@ -125,12 +128,30 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                             <div class="col-sm-1">
-                                <input required type="text" class="form-control" name="blood_type">
+                                <select required class="form-control" name="blood_type">
+                                    <option value="0+">0+</option>
+                                    <option value="0-">0-</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                             <div class="col-sm-3">
                                 <input required type="text" class="form-control" name="abdominal_circumference">
                             </div>
+                             <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis Notes</label>
+                            <div class="col-sm-3">
+                                <input required type="text" class="form-control" name="diagnosis_notes">
+                            </div>
+                             <label for="inputPassword" class="col-sm-1 col-form-label">Medication Notes</label>
+                            <div class="col-sm-3">
+                                <input required type="text" class="form-control" name="medication_notes">
+                            </div>
+                        </div> 
                         </div> 
                         <h6 class="mb-4 mt-5" style="font-weight: 700">Immunization Record</h6>
                         <div class="table-responsive">
