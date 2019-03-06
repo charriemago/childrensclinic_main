@@ -8,7 +8,7 @@
 	ini_set('memory_limit', '-1');
 	ini_set('max_execution_time', 300);
 
-	define('DATABASE_HOST', SERVERTYPE == 'local' ? 'localhost' : 'localhost');
+	define('DATABASE_HOST', SERVERTYPE == 'local' ? 'dt0017' : 'localhost');
 	define('DATABASE_USER', SERVERTYPE == 'local' ? 'root' : 'id8601971_root');
 	define('DATABASE_PASS', SERVERTYPE == 'local' ? '' : 'db_clinic');
 	define('DATABASE_NAME', SERVERTYPE == 'local' ? 'db_clinic' : 'id8601971_db_clinic');

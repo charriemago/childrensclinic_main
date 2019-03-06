@@ -15,11 +15,13 @@
 	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/themify-icons/themify-icons.css" />
 	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/datatables/datatables.min.css"/>
 	<link rel="stylesheet" href="<?=URL?>public/css/main.css">
+	<link rel="stylesheet" type="text/css"  href="<?=URL?>public/bootstrap-select/css/bootstrap-select.css">
 	<script src="<?=URL?>public/js/jquery.min.js"></script>
 	<script src="<?=URL?>public/js/popper.min.js"></script>
 	<script src="<?=URL?>public/js/bootstrap.min.js"></script>
 	<script src="<?=URL?>public/js/global.js"></script>
 	<script src="<?= URL;?>public/datatables/datatables.min.js"></script>
+	<script src="<?= URL;?>public/bootstrap-select/js/bootstrap-select.js"></script>
 	<script>
 		const URL = '<?=URL?>';
 	</script>
@@ -41,9 +43,9 @@
 				<li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>patient">Patient Record</a>
 				</li>
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>followup">Follow up Visit</a>
-				</li>
+				</li> -->
 				<li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>billing">Payment</a>
 				</li>

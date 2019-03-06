@@ -15,6 +15,11 @@ class Fee extends Controller
 		$this->view->fee = $this->model->all();
 		$this->view->render('views/fee/fee.php');
     }
+	public function other()
+	{
+		$this->view->fee = $this->model->all();
+		$this->view->render('views/fee/other.php');
+    }
 	public function updateFee()
 	{
 		$this->model->updateFee();
