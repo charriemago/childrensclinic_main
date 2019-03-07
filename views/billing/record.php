@@ -2,6 +2,7 @@
     $vaccines = $this->vaccines;
     $patient = $this->patientList;
     $bill = $this->bills;
+    $billid = $this->billid;
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -51,12 +52,40 @@
                                 <?php endforeach;?> 
                             </tbody>
                         </table>
-
-                        <h6 class="mb-4 mt-5" style="font-weight: 700">Other Fees</h6>
+                        <h6 class="mb-4 mt-5" style="font-weight: 700">Other Fee</h6>
+                        <table class="table table-pad table-striped table-hover table-standard">
+                            <thead>
+                                <tr>
+                                    <th><strong>Other Fee</strong></th>                  
+                                    <th>Amount</th>                                             
+                                </tr> 
+                            </thead>
+                            <tbody>
+                                <?php $other = Db::selectByColumn(DATABASE_NAME, 'tbl_billing_other', array('billing_id' => $billid)); ?>
+                                <?php foreach ($other as $key => $eachOther):?>
+                                <?php $otherfees = Db::selectByColumn(DATABASE_NAME, 'tbl_other_fee', array('id' => $eachOther['other_fee_id'])); ?>
+                                    <tr> 
+                                        <td class="text-standard">
+                                            <strong><?=$otherfees[0]['fee_name']?></strong>
+                                        </td>
+                                        <td>     
+                                            <input disabled type="text" class="form-control" name="bill[]" value="<?= !empty($otherfees[0]['fee']) ? number_format($otherfees[0]['fee'], 2) : 0.00?>">
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?> 
+                            </tbody>
+                        </table>
+                        <h6 class="mb-4 mt-5" style="font-weight: 700"></h6>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Doctor's Fee</label>
+                            <label class="col-sm-2 col-form-label">Consulation Fee</label>
                             <div class="col-sm-10">
                                 <input disabled class="form-control" type="text" name="doc_fee" value="<?= !empty($bill[0]['doctors_fee']) ? number_format($bill[0]['doctors_fee'],2) : 0.00?>">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Addtional Fee</label>
+                            <div class="col-sm-10">
+                                <input disabled class="form-control" type="text" name="add_fee" value="<?= !empty($bill[0]['add_fee']) ? number_format($bill[0]['add_fee'],2) : 0.00?>">
                             </div>
                         </div>
                         <hr>

@@ -57,25 +57,25 @@
                                             <input type="hidden" class="form-control" name="vaccine[]" value="<?=$vaccine['id']?>">      
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['1st']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['1st']?>" value="1">   
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['2nd']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['2nd']?>" value="2">   
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['3rd']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['3rd']?>" value="3">   
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_1']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['booster_1']?>" value="4">   
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_2']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['booster_2']?>" value="5">   
                                         </td>
                                         <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_3']?>">   
+                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>[]" data-amount="<?=$vaccineBill[0]['booster_3']?>" value="6">   
                                         </td>
                                         <td class="totalVaccineBill">
-                                            <input type="hidden" class="inputTotalVaccineBill" value="0">
+                                            <input type="hidden" class="inputTotalVaccineBill" name="inputTotalVaccineBill[]" value="0">
                                             <span></span>
                                         </td>
                                     </tr>
@@ -83,61 +83,37 @@
                             </tbody>
                         </table>
 
-                          <h6 class="mb-4 mt-5" style="font-weight: 700">Other Fee</h6>
+                        <h6 class="mb-4 mt-5" style="font-weight: 700">Other Fee</h6>
                         <table class="table table-pad table-striped table-hover table-standard">
                             <thead>
                                 <tr>
-                                    <th rowspan="2" style="vertical-align: middle;"><strong>Name</strong></th>                  
-                                    <th colspan="7">Bill</th>                                               
-                                </tr>   
-                                <tr>                  
-                                    <th>1st</th>                                               
-                                    <th>2nd</th>                                               
-                                    <th>3rd</th>                                               
-                                    <th>Booster 1</th>                                               
-                                    <th>Booster 2</th>                                               
-                                    <th>Booster 3</th>                                               
-                                    <th>Total</th>                                               
-                                </tr>   
+                                    <th><strong>Other Fee</strong></th>                  
+                                    <th>Amount</th>                                               
+                                    <th></th>                                               
+                                </tr> 
                             </thead>
                             <tbody>
-                                <?php foreach ($vaccines as $key => $vaccine):?>
-                                <?php $vaccineBill = Db::selectByColumn(DATABASE_NAME, 'tbl_vaccine_bill', array('vaccine_id' => $vaccine['id'])); ?>
+                                <?php $other = Db::loadAll(DATABASE_NAME, 'tbl_other_fee'); ?>
+                                <?php foreach ($other as $key => $eachOther):?>
                                     <tr> 
                                         <td class="text-standard">
-                                            <strong><?=$vaccine['vaccine']?></strong>
-                                            <input type="hidden" class="form-control" name="vaccine[]" value="<?=$vaccine['id']?>">      
+                                            <strong><?=$eachOther['fee_name']?></strong>
                                         </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['1st']?>">   
+                                        <td>     
+                                            <strong><?=$eachOther['fee']?></strong>
                                         </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['2nd']?>">   
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['3rd']?>">   
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_1']?>">   
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_2']?>">   
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" class="bill-vacc" name="bill_<?=$vaccine['id']?>" value="<?=$vaccineBill[0]['booster_3']?>">   
-                                        </td>
-                                        <td class="totalVaccineBill">
-                                            <input type="hidden" class="inputTotalVaccineBill" value="0">
-                                            <span></span>
+                                        <td class="billOtherAmount">
+                                            <input type="checkbox" class="bill-other" name="other_fee[]" data-amount="<?= $eachOther['fee']?>" value="<?=$eachOther['id']?>">   
+                                            <input type="hidden" class="bill-other-amount" name="bill_other_amount[]" value="0">   
                                         </td>
                                     </tr>
                                 <?php endforeach;?> 
                             </tbody>
                         </table>
 
-                        <h6 class="mb-4 mt-5 text-right" style="font-weight: 700">Other Fees</h6>
+                        <h6 class="mb-4 mt-5 text-right" style="font-weight: 700"></h6>
                         <div class="form-group row">
-                            <label class="col-sm-8 col-form-label text-right">Doctor's Fee</label>
+                            <label class="col-sm-8 col-form-label text-right">Consultation Fee</label>
                             <div class="col-sm-4">
                                 <input class="form-control" type="text" name="doc_fee" value="<?= !empty($fee) ? $fee[0]['fee'] : 0?>" readonly>
                             </div>
@@ -152,7 +128,7 @@
                         <div class="form-group row">
                             <label class="col-sm-8 col-form-label text-right">Total Fees</label>
                             <div class="col-sm-4">
-                                <label id="superTotal" style="padding-top: 2px; font-size: 16px; font-weight: bolder"></label>
+                                <label id="superTotal" style="padding-top: 2px; font-size: 16px; font-weight: bolder">P <?= !empty($fee) ? $fee[0]['fee'] : 0?></label>
                             </div>
                         </div>
                     </div>
