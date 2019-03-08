@@ -109,6 +109,7 @@
                         <label for="inputPassword" class="col-sm-1 col-form-label">Type of Delivery</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="typeofdelivery">
+                                <option value="" required selected>Select Type of Delivery</option>
                                 <option value="normal">Normal</option>
                                 <option value="cesarean">Cesarean</option>
                             </select>
@@ -131,6 +132,7 @@
                         <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                         <div class="col-sm-1">
                             <select class="form-control" name="blood_type">
+                                <option value="" required selected>Select Blood Type</option>
                                 <option value="0+">0+</option>
                                 <option value="0-">0-</option>
                                 <option value="A+">A+</option>

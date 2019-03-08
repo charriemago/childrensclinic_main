@@ -1,5 +1,11 @@
 $(function(){
-    
+    $('input[name="no_of_mos"]').keyup(function(){
+        var value = $(this).val();
+        var week = Math.ceil(value * 4.34524);
+        $('input[name="weeks"]').val(week);
+        var day = week * 7;
+        $('input[name="days"]').val(day);
+    })
     $('#addPatientForm').submit(function(){
         let form = $(this).serialize();
         validateForm("Are you sure you want to add this data?" , function() {
@@ -63,8 +69,6 @@ $(function(){
 })
 
 function weekCount(year, month_number) {
-
-    // month_number is in the range 1..12
 
     var firstOfMonth = new Date(year, month_number-1, 1);
     var lastOfMonth = new Date(year, month_number, 0);
