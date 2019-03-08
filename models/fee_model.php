@@ -16,7 +16,7 @@ class Fee_model extends Model
         return DB::loadAll(DATABASE_NAME, 'tbl_other_fee');
     }
     public function updateFee(){
-        $check = $this->all;
+        $check = $this->all();
         if(empty($check)){
             $data = array(
                 'fee' => $_POST['fee'],
@@ -30,7 +30,7 @@ class Fee_model extends Model
                 'modified_by' => 1,
                 'date_modified' => date('Y-m-d H:i:s')
             );
-            Db::insert(DATABASE_NAME, self::$table, $data, array('id' => $check[0]['id']));
+            Db::update(DATABASE_NAME, self::$table, $data, array('id' => $check[0]['id']));
         }
     }
     public function addOther(){

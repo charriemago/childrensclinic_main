@@ -200,7 +200,6 @@
     <div class="row">
         <div class="col-md-12 mt-4">
             <form class="form-standard form-add-visit" method="POST">
-                <input type="hidden" name="patient_id" value="<?= $id?>">
                 <div class=" clearfix">
                     <div class="float-left">
                         <h5 class="float-left"> Follow-Up Visits</h5>
