@@ -279,7 +279,7 @@ class DB{
 		foreach ($array as $key => $value) {
 			$array[$key] = $data[$key];
 		}
-		$stmt->execute();
+		$stmt->execute() or die($stmt->error);
 	}
 
 

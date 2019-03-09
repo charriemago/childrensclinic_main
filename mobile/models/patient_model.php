@@ -38,7 +38,7 @@ class Patient_model extends Model
     }
     public function delete(){
         $data['active'] = 'no';
-        $data['modified_by'] = 1;
+        $data['modified_by'] = $this->user['id'];
         $data['date_modified'] = date('Y-m-d H:i:s');
         Db::update(DATABASE_NAME, 'tbl_patient', $data, array('id' => $_POST['id']));
     }
@@ -58,7 +58,7 @@ class Patient_model extends Model
             'guardian_name' => $_POST['guardian_name'],
             'contact_no' => $_POST['contact_no'],
             'birthday' => $_POST['birthday'],
-            'created_by' => 1
+            'created_by' => $this->user['id']
         ];
         $patient_id = Db::insert(DATABASE_NAME, $this->table, $data);
         if($patient_id > 0) {
@@ -73,6 +73,42 @@ class Patient_model extends Model
                 }
             }
         }
+
+        // $result = 1;
+        // foreach ($_POST['date_visit'] as $key => $each) { // this will if date in array is already exist.
+        //     $date_visit = date('Y-m-d H:i:s', strtotime($_POST['date_visit'][$key]));
+        //     $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_created' => $date_visit));
+        //     if(empty($validate_visit)) {
+        //         $result .= 1;
+        //     } else {
+        //         $result .= 0;
+        //     }
+        // }
+       
+        // if(strpos($result, '0') !== false) {
+        //     echo 0;
+        //     exit;
+        // } 
+        foreach ($_POST['date_visit'] as $key => $each) {
+            $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
+            $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $date_visit, 'patient_id' => $patient_id));
+            
+            if(empty($validate_visit)) {
+
+                $data = [
+                    'patient_id' => $patient_id,
+                    'age' => 0,
+                    'weight' => $_POST['weight'][$key],
+                    'height' => $_POST['height'][$key],
+                    'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
+                    'date_visit' => $date_visit,
+                    'date_next' => $_POST['date_nextvisit'][$key],
+                    'created_by' => $this->user['id'],
+                    'date_created' => date('Y-m-d H:i:s')
+                ];
+                DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
+            }
+        }
     }
 
     public function insertParent($patientId) {
@@ -84,7 +120,7 @@ class Patient_model extends Model
             'mother_name' => $_POST['mother_name'],
             'mother_occupation' => $_POST['mother_occupation'],
             'mother_telephone' => $_POST['mother_telephone'],
-            'created_by' => 1
+            'created_by' => $this->user['id']
         );
         $id = Db::insert(DATABASE_NAME, 'tbl_parent', $data);
         return $id;
@@ -93,18 +129,20 @@ class Patient_model extends Model
     public function insertBirthHistory($patientId) {
         $data = array(
             'patient_id' => $patientId,
-            'term' => $_POST['term'],
-            'no_of_mos' => $_POST['no_of_mos'],
-            'weeks' => $_POST['weeks'],
-            'days' => $_POST['days'],
-            'type_of_delivery' => $_POST['type_of_delivery'],
-            'birth_weight' => $_POST['birth_weight'],
-            'birth_length' => $_POST['birth_length'],
-            'blood_type' => $_POST['blood_type'],
-            'head_circumference' => $_POST['head_circumference'],
-            'chest_circumference' => $_POST['chest_circumference'],
-            'abdominal_circumference' => $_POST['abdominal_circumference'],
-            'created_by' => 1
+            'term' => isset($_POST['term']) ? $_POST['term'] : '',
+            'no_of_mos' => isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '',
+            'weeks' => isset($_POST['weeks']) ? $_POST['weeks'] : '',
+            'days' => isset($_POST['days']) ? $_POST['days'] : '',
+            'type_of_delivery' => isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '',
+            'birth_weight' => isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '',
+            'birth_length' => isset($_POST['birth_length']) ? $_POST['birth_length'] : '',
+            'blood_type' => isset($_POST['blood_type']) ? $_POST['blood_type'] : '',
+            'head_circumference' => isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '',
+            'chest_circumference' => isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '',
+            'abdominal_circumference' => isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '',
+            'diagnosis_notes' => isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '',
+            'medication_notes' => isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '',
+            'created_by' => $this->user['id']
         );
         $id = Db::insert(DATABASE_NAME, 'tbl_birth_history', $data);
         return $id;
@@ -123,7 +161,7 @@ class Patient_model extends Model
                 'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0,
                 'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0,
                 'reaction' => $_POST['reaction'][$vaccine['id']],
-                'created_by' => 1
+                'created_by' => $this->user['id']
             );
             $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record', $data);
         }
@@ -162,7 +200,7 @@ class Patient_model extends Model
             $data['guardian_name'] = $_POST['guardian_name'];
             $data['contact_no'] = $_POST['contact_no'];
             $data['birthday'] = $_POST['birthday'];
-            $data['modified_by'] = 1;
+            $data['modified_by'] = $this->user['id'];
             Db::update(DATABASE_NAME, $this->table, $data, $where);
             
             $this->updateParent($parent);
@@ -193,21 +231,23 @@ class Patient_model extends Model
     public function updateBirthHistory($data = []) {
         $where = [
             'id' => $data['id']
-        ];
+        ]; 
         unset($data['id']);
 
-        $data['term'] = $_POST['term'];
-        $data['no_of_mos'] = $_POST['no_of_mos'];
-        $data['weeks'] = $_POST['weeks'];
-        $data['days'] = $_POST['days'];
-        $data['type_of_delivery'] = $_POST['type_of_delivery'];
-        $data['birth_weight'] = $_POST['birth_weight'];
-        $data['birth_length'] = $_POST['birth_length'];
-        $data['blood_type'] = $_POST['blood_type'];
-        $data['head_circumference'] = $_POST['head_circumference'];
-        $data['chest_circumference'] = $_POST['chest_circumference'];
-        $data['abdominal_circumference'] = $_POST['abdominal_circumference'];
-        $data['modified_by'] = 1;
+        $data['term'] = isset($_POST['term']) ? $_POST['term'] : '';
+        $data['no_of_mos'] = isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '';
+        $data['weeks'] = isset($_POST['weeks']) ? $_POST['weeks'] : '';
+        $data['days'] = isset($_POST['days']) ? $_POST['days'] : '';
+        $data['type_of_delivery'] = isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '';
+        $data['birth_weight'] = isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '';
+        $data['birth_length'] = isset($_POST['birth_length']) ? $_POST['birth_length'] : '';
+        $data['blood_type'] = isset($_POST['blood_type']) ? $_POST['blood_type'] : '';
+        $data['head_circumference'] = isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '';
+        $data['chest_circumference'] = isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '';
+        $data['abdominal_circumference'] = isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '';
+        $data['diagnosis_notes'] = isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '';
+        $data['medication_notes'] = isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '';
+        $data['modified_by'] = $this->user['id'];
         $data['date_modified'] = date('Y-m-d H:i:s');
 
         Db::update(DATABASE_NAME, 'tbl_birth_history', $data, $where);
@@ -236,7 +276,7 @@ class Patient_model extends Model
                 $data['Booster_2'] = isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0;
                 $data['Booster_3'] = isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0;
                 $data['reaction'] = $_POST['reaction'][$vaccine['id']];
-                $data['modified_by'] = 1;
+                $data['modified_by'] = $this->user['id'];
                 $data['date_modified'] = date('Y-m-d H:i:s');
                 Db::update(DATABASE_NAME, 'tbl_immunization_record', $data, $where2);
             } else {
@@ -250,10 +290,14 @@ class Patient_model extends Model
                     'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0,
                     'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0,
                     'reaction' => $_POST['reaction'][$vaccine['id']],
-                    'created_by' => 1
+                    'created_by' => $this->user['id']
                 );
                 $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record', $data);
             }
         }
+    }
+    public function allVisits($id) {
+        $data = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('patient_id' => $id));
+        return $data;
     }
 }

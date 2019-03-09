@@ -1,6 +1,18 @@
 $(function() {
     addVisits();
     addNewLine();
+    $('#table-visits').on('blur', 'input[name="date_nextvisit[]"]', function(){
+        var visit = $(this).closest('tr').find('input[name="date_visit[]"]').val();
+        var next = $(this).val();
+        that = $(this);
+        var newvisit = new Date(visit);
+        var newnext = new Date(next);
+        
+        if(newvisit >= newnext){
+            that.val('');
+            alert('Invalid input');
+        }
+    })
 });
 
 
@@ -10,16 +22,21 @@ function addNewLine() {
         var newLine = `
             <tr>
                 <td><input class="form-control" type="date" name="date_visit[]" required="required"></td>      
-                <td><input class="form-control" type="number" name="age[]" required="required"></td>      
+                <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>
                 <td><input class="form-control" type="text" name="weight[]" required="required"></td>      
                 <td><input class="form-control" type="text" name="height[]" required="required"></td>      
                 <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
+                <td><a class="btn-delete"><i class="ti-trash text-danger"></i></a></td>
             </tr>
         `;
         $('#table-visits tbody').append(newLine);
 
     });
+    $('#table-visits').on('click', '.btn-delete', function(){
+        $(this).closest('tr').remove();
+    })
 }
+
 function addVisits() {
     $('.form-add-visit').submit(function(){
         let form = $(this).serialize();

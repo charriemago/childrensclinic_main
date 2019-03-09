@@ -48,16 +48,25 @@
 					<a class="nav-link text-standard" href="<?= URL?>patient">Patient Record</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-standard" href="<?= URL?>followup">Follow up Visit</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link text-standard" href="<?= URL?>billing">Billing</a>
+					<a class="nav-link text-standard" href="<?= URL?>billing">Payment</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link text-standard d-none" href="<?= URL?>sms">SMS</a>
 				</li>
 				<li class="nav-item">
+				</li>
+				<li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>reports">Reports</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-standard" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					File Maintenance
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="<?= URL?>vaccine">Vaccines Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee">Consultation Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee/other">Others Fee</a>
+					</div>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">

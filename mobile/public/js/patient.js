@@ -1,5 +1,11 @@
 $(function(){
-    
+    $('input[name="no_of_mos"]').keyup(function(){
+        var value = $(this).val();
+        var week = Math.ceil(value * 4.34524);
+        $('input[name="weeks"]').val(week);
+        var day = week * 7;
+        $('input[name="days"]').val(day);
+    })
     $('#addPatientForm').submit(function(){
         let form = $(this).serialize();
         validateForm("Are you sure you want to add this data?" , function() {
@@ -7,7 +13,7 @@ $(function(){
             .done( data => {
                 let {msg} = JSON.parse(data);
                 alert(msg);
-                location.reload();
+                location.href = URL+'patient';
             })
             .fail ( err_data => {
                 let err = JSON.parse(err_data.responseText);
@@ -57,4 +63,17 @@ $(function(){
         $('input, textarea').prop('disabled', false);
         $('.btn-update').removeClass('d-none');
     })
+    $('.btn-add').click(function(){
+        $('#addVaccineModal').modal('toggle');
+    })
 })
+
+function weekCount(year, month_number) {
+
+    var firstOfMonth = new Date(year, month_number-1, 1);
+    var lastOfMonth = new Date(year, month_number, 0);
+
+    var used = firstOfMonth.getDay() + lastOfMonth.getDate();
+
+    return Math.ceil( used / 7);
+}

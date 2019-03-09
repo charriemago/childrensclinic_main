@@ -8,9 +8,9 @@
         </div>
         <input type="text" class="form-control search-box-input" placeholder="Search">
         <div class="input-group-prepend input-group-left">
-            <!-- <button class="btn btn-standard btn-sm"><i class="pe-7s-print pe-va pe-lg"></i> <span>Export</span></button> -->
+            <button class="btn btn-standard btn-sm btn-export"><i class="pe-7s-print pe-va pe-lg"></i> <span>Export</span></button>
             <a class="btn btn-standard btn-sm" href="<?=URL?>billing/add">
-                <i class="pe-7s-plus pe-va pe-lg"></i> <span>Add Billing</span
+                <i class="pe-7s-plus pe-va pe-lg"></i> <span>Add Payment</span
             ></a>
         </div>
     </div>
@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="box-title clearfix">
                 <div class="float-left">
-                    <h5 class="mb-3 float-left"> Billing List</h5>
+                    <h5 class="mb-3 float-left"> Payment List</h5>
                 </div>
                 <div class="float-right">
                    
@@ -42,7 +42,7 @@
                                 <?php foreach($bills as $each){
                                 ?>
                                     <tr>
-                                        <td><?= date('F d, Y',strtotime($each['date_created']))?></td>      
+                                        <td><?= date('F d, Y H:i A',strtotime($each['date_created']))?></td>      
                                         <td><?= $each['patient_name']?></td> 
                                         <td>P<?= number_format($each['total_fee'],2)?></td> 
                                         <td><a href="<?=URL?>billing/record/<?= $each['id']?>" class="text-info"><i class="ti-search"></i></td> 
@@ -58,9 +58,10 @@
 </div>
 <script>
     $(function(){
-        var table = $('table').DataTable();
+        var table = $('table').DataTable({ "ordering": false});
         $('.search-box-input').on( 'keyup', function () {
             table.search( this.value ).draw();
         });
     })
 </script>
+<script src="<?=URL?>public/js/billing.js"></script>
