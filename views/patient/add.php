@@ -149,7 +149,7 @@
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis Notes</label>
+                        <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis and Phycisian's Notes</label>
                         <div class="col-sm-5">
                             <input required type="text" class="form-control" name="diagnosis_notes">
                         </div>
