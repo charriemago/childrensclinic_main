@@ -12,3 +12,6 @@
 	define('DATABASE_USER', SERVERTYPE == 'local' ? 'root' : 'id8601971_root');
 	define('DATABASE_PASS', SERVERTYPE == 'local' ? '' : 'db_clinic');
 	define('DATABASE_NAME', SERVERTYPE == 'local' ? 'db_clinic' : 'id8601971_db_clinic');
+
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);

@@ -54,7 +54,7 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Contact No.</label>
                         <div class="col-sm-2">
-                            <input required type="text" class="form-control" name="father_telephone">
+                            <input required type="number" class="form-control" name="father_telephone">
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -68,7 +68,7 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Contact No.</label>
                         <div class="col-sm-2">
-                            <input required type="text" class="form-control" name="mother_telephone">
+                            <input required type="number" class="form-control" name="mother_telephone">
                         </div>
                     </div> <hr>
                     <label>In case of emergency</label>
@@ -79,14 +79,14 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Contact No.</label>
                         <div class="col-sm-4">
-                            <input required type="text" class="form-control" name="contact_no">
+                            <input required type="number" class="form-control" name="contact_no">
                         </div>
                     </div> 
                     <h6 class="mb-4 mt-5" style="font-weight: 700">Birth History</h6>
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-1 col-form-label">Term</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" name="term">
+                            <input type="number" class="form-control" name="term">
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">No. Of Months</label>
                         <div class="col-sm-1">
@@ -102,7 +102,7 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Head Circumference</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="head_circumference" placeholder="cm">
+                            <input type="number" class="form-control" name="head_circumference" placeholder="cm">
                         </div>
                     </div> 
                     <div class="form-group row">
@@ -116,18 +116,18 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Chest Circumference</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="chest_circumference"
-                            placeholder="cm">
+                            <input type="number" class="form-control" name="chest_circumference"
+                            placeholder="cm" placeholder="cm">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-1 col-form-label">Birth Weight</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="birth_weight" placeholder="kg">
+                            <input type="number" class="form-control" name="birth_weight" placeholder="kg">
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Birth Length</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="birth_length" placeholder="cm">
+                            <input type="number" class="form-control" name="birth_length" placeholder="cm">
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                         <div class="col-sm-1">
@@ -145,7 +145,7 @@
                         </div>
                         <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" name="abdominal_circumference" placeholder="cm">
+                            <input type="number" class="form-control" name="abdominal_circumference" placeholder="cm">
                         </div>
                     </div> 
                     <div class="form-group row">
