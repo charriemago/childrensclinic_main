@@ -50,11 +50,56 @@
 							<button class="btn btn-outline-light btn-login btn-block"> Login</button>
 						</div>
 						<div class="form-group text-right">
-							<!-- <a href="#" class="forgot-pass text-right">Forgot Password?</a> -->
+							<a href="#" class="forgot-pass text-right">Forgot Password?</a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
+		<form method="post" id="resetForm" class="form-standard">
+			<div class="modal fade" id="resetModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">
+								Reset Password
+							</h5>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label>Please enter your username to proceed resetting your password.</label>
+								<input class="form-control" name="usernameReset" required>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-standard" data-dismiss="modal"  role="button">
+								<i class="pe-7s-close-circle pe-va pe-lg" aria-hidden="true"></i> CANCEL</button>
+							<button type="submit" class="btn btn-standard-success" data-action="save">
+								<i class="pe-7s-check pe-va pe-lg" aria-hidden="true"></i> RESET</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<script>
+			$(function(){
+				$('.forgot-pass').click(function(){
+					$('#resetModal').modal('toggle');
+				})
+				$('#resetForm').submit(function(){
+					var form = $(this).serialize();
+					var username = $('input[name="usernameReset"]').val();
+					$.post(URL + 'resetPassCheck', form)
+					.done(function(returnData){
+						if(returnData == '1'){
+							location.href = URL + 'forgotPassword?username=' + username;
+						} else{
+							alert('Invalid Username');
+						}
+					})
+					return false;
+				})
+			})
+		</script>
 	</body>
 </html>
