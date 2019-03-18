@@ -179,10 +179,10 @@
                                         <td class="text-standard">
                                             <strong><?=$vaccine['vaccine']?></strong>
                                         </td>      
-                                        <td><input type="checkbox" name="1st[<?=$vaccine['id']?>]"></td>      
-                                        <td><input type="checkbox" name="2nd[<?=$vaccine['id']?>]"></td>      
-                                        <td><input type="checkbox" name="3rd[<?=$vaccine['id']?>]"></td>      
-                                        <td><input type="checkbox" name="Booster_1[<?=$vaccine['id']?>]"></td>      
+                                        <td><input type="date" name="1st[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
+                                        <td><input type="date" name="2nd[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
+                                        <td><input type="date" name="3rd[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
+                                        <td><input type="date" name="Booster_1[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
                                         <td><input type="checkbox" name="Booster_2[<?=$vaccine['id']?>]"></td>      
                                         <td><input type="checkbox" name="Booster_3[<?=$vaccine['id']?>]"></td>      
                                         <td><textarea class="form-control" name="reaction[<?=$vaccine['id']?>]" rows="2"></textarea></td>              
@@ -197,6 +197,97 @@
     </div>
 </div>
 <script src="<?=URL?>public/js/patient.js"></script>
+
+
+<!-- edit in other vaccine -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <form class="form-standard form-add-visit" method="POST">
+                <div class=" clearfix">
+                    <div class="float-left">
+                        <h5 class="float-left"> Other Vaccines </h5>
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
+                    </div>
+                </div><hr>
+                <div class="card card-standard">
+                    <div class="card-body">
+                        <h6 style="font-weight: 700">Records</h6>
+                        <div class="table-responsive">
+                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
+                                <thead>
+                                    <tr>
+                                        <th>Vaccine</th>
+                                        <th>Date of Vaccine shots</th>                  
+                                        <!-- <th>Age</th>    -->                                  
+                                        <th>Reaction</th>                                     
+                                    </tr>   
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                       <td class="text-standard">
+                                            <strong><?=$vaccine['vaccine']?></strong>
+                                        </td>      
+                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
+                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
+                
+                                        <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>
+
+<!-- edit in medication -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <form class="form-standard form-add-visit" method="POST">
+                <div class=" clearfix">
+                    <div class="float-left">
+                        <h5 class="float-left"> Medication </h5>
+                    </div>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
+                    </div>
+                </div><hr>
+                <div class="card card-standard">
+                    <div class="card-body">
+                        <h6 style="font-weight: 700">Records</h6>
+                        <div class="table-responsive">
+                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
+                                <thead>
+                                    <tr>
+                                    
+                                        <th>Date of Prescription</th>                  
+                                        <!-- <th>Age</th>    -->                                  
+                                        <th>Prescription of Doctor/Physicians</th>                                     
+                                    </tr>   
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
+                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
+                
+                                        <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -230,8 +321,8 @@
                                         <td><input class="form-control" type="date" name="date_visit[]" required="required"></td> 
                                         <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
                                        <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
-                                        <td><input class="form-control" type="text" name="weight[]" required="required"></td>      
-                                        <td><input class="form-control" type="text" name="height[]" required="required"></td>      
+                                        <td><input class="form-control" type="number" name="weight[]" required="required" placeholder="kg"></td>      
+                                        <td><input class="form-control" type="number" name="height[]" required="required" placeholder="cm"></td>      
                                         <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
                                     </tr>
                                 </tbody>
