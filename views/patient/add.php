@@ -148,7 +148,7 @@
                             <input type="number" class="form-control" name="abdominal_circumference" placeholder="cm">
                         </div>
                     </div> 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis and Phycisian's Notes</label>
                         <div class="col-sm-5">
                             <input required type="text" class="form-control" name="diagnosis_notes">
@@ -157,183 +157,11 @@
                         <div class="col-sm-5">
                             <input required type="text" class="form-control" name="medication_notes">
                         </div>
-                    </div> 
-                    <h6 class="mb-4 mt-5" style="font-weight: 700">Immunization Record</h6>
-                    <div class="table-responsive">
-                        <table class="table table-pad table-striped table-hover table-standard">
-                            <thead>
-                                <tr>
-                                    <th><strong>Vaccine</strong></th>                  
-                                    <th>1st</th>                   
-                                    <th>2nd</th>                   
-                                    <th>3rd</th>                   
-                                    <th>Booster 1</th>                   
-                                    <th>Booster 2</th>                   
-                                    <th>Booster 3</th>                   
-                                    <th>Reaction</th>                                                   
-                                </tr>   
-                            </thead>
-                            <tbody>
-                                <?php foreach ($vaccines as $key => $vaccine) : ?>
-                                    <tr>
-                                        <td class="text-standard">
-                                            <strong><?=$vaccine['vaccine']?></strong>
-                                        </td>      
-                                        <td><input type="date" name="1st[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
-                                        <td><input type="date" name="2nd[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
-                                        <td><input type="date" name="3rd[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
-                                        <td><input type="date" name="Booster_1[<?=$vaccine['id']?>]" class="form-control" max="<?=date('Y-m-d')?>"></td>      
-                                        <td><input type="checkbox" name="Booster_2[<?=$vaccine['id']?>]"></td>      
-                                        <td><input type="checkbox" name="Booster_3[<?=$vaccine['id']?>]"></td>      
-                                        <td><textarea class="form-control" name="reaction[<?=$vaccine['id']?>]" rows="2"></textarea></td>              
-                                    </tr>
-                                <?php endforeach;?> 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="<?=URL?>public/js/patient.js"></script>
-
-
-<!-- edit in other vaccine -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-visit" method="POST">
-                <div class=" clearfix">
-                    <div class="float-left">
-                        <h5 class="float-left"> Other Vaccines </h5>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                    </div>
-                </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th>Vaccine</th>
-                                        <th>Date of Vaccine shots</th>                  
-                                        <!-- <th>Age</th>    -->                                  
-                                        <th>Reaction</th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                       <td class="text-standard">
-                                            <strong><?=$vaccine['vaccine']?></strong>
-                                        </td>      
-                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
-                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
-                
-                                        <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-             </form>
-        </div>
-    </div>
-</div>
-
-<!-- edit in medication -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-visit" method="POST">
-                <div class=" clearfix">
-                    <div class="float-left">
-                        <h5 class="float-left"> Medication </h5>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                    </div>
-                </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                    
-                                        <th>Date of Prescription</th>                  
-                                        <!-- <th>Age</th>    -->                                  
-                                        <th>Prescription of Doctor/Physicians</th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <tr>
-
-                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
-                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
-                
-                                        <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-             </form>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-visit" method="POST">
-                <div class=" clearfix">
-                    <div class="float-left">
-                        <h5 class="float-left"> Follow-Up Visits</h5>
-                    </div>
-                    <div class="float-right">
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                    </div>
-                </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th>Date Visit</th>
-                                        <th>Date Next Check-up</th>                  
-                                        <!-- <th>Age</th>    -->                
-                                        <th>Weight</th>                   
-                                        <th>Height</th>                   
-                                        <th>Diagnosis and Physician's Notes</th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input class="form-control" type="date" name="date_visit[]" required="required"></td> 
-                                        <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>      
-                                       <!--  <td><input class="form-control" type="number" name="age[]" required="required"></td>    -->   
-                                        <td><input class="form-control" type="number" name="weight[]" required="required" placeholder="kg"></td>      
-                                        <td><input class="form-control" type="number" name="height[]" required="required" placeholder="cm"></td>      
-                                        <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-             </form>
-        </div>
-    </div>
-</div>
-<script src="<?=URL?>public/js/follow_up.js"></script>
-
+                    </div>  -->
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</div> 
 </form>
+<script src="<?=URL?>public/js/patient.js"></script>

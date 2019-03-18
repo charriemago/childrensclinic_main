@@ -141,39 +141,14 @@
                                 <input required disabled type="text" class="form-control" name="medication_notes" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['medication_notes'] : '' ?>">
                             </div>
                         </div>
-                        <h6 class="mb-4 mt-5" style="font-weight: 700">Immunization Record</h6>
-                        <div class="table-responsive">
-                            <table class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th><strong>Vaccine</strong></th>                  
-                                        <th>1st</th>                   
-                                        <th>2nd</th>                   
-                                        <th>3rd</th>                   
-                                        <th>Booster 1</th>                   
-                                        <th>Booster 2</th>                   
-                                        <th>Booster 3</th>                   
-                                        <th>Reaction</th>                                                   
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($vaccines as $key => $vaccine) : ?>
-                                        <?php $immune = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record', array('patient_id' => $this->patient_id, 'vaccine_id' => $vaccine['id']));?>
-                                        <tr>
-                                            <td class="text-standard">
-                                                <strong><?=$vaccine['vaccine']?></strong>
-                                            </td>      
-                                            <td><input type="checkbox" name="1st[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['1st'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="2nd[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['2nd'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="3rd[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['3rd'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_1[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_1'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_2[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_2'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_3[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_3'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><textarea disabled class="form-control" name="reaction[<?=$vaccine['id']?>]" rows="2"><?= !empty($immune[0]) ? $immune[0]['reaction'] : '' ?></textarea></td>              
-                                        </tr>
-                                    <?php endforeach;?> 
-                                </tbody>
-                            </table>
+                        <hr>
+                        <nav class="nav nav-pills nav-fill">
+                            <a class="nav-item nav-link" href="#">Medication</a>
+                            <a class="nav-item nav-link" href="#">Follow Up Visit</a>
+                            <a class="nav-item nav-link" href="#">Vaccine</a>
+                            <a class="nav-item nav-link" href="#">Other Vaccine</a>
+                        </nav>
+                        <div class="returnModule">
                         </div>
                     </div>
                 </div>
@@ -183,58 +158,10 @@
 </div>
 <script src="<?=URL?>public/js/patient.js"></script>
 
-
-<?php 
-    $id = $this->getId;
-    $visit = $this->allVisits;
-?>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-visit" method="POST">
-                <input type="hidden" name="patient_id" value="<?= $id?>">
-                <div class=" clearfix">
-                    <div class="float-left">
-                        <h5 class="float-left"> Follow-Up Visits</h5>
-                    </div>
-                    <div class="float-right">
-                        <button type="submit" class="btn btn-standard-success btn-sm"><i class="pe-7s-paper-plane pe-lg"></i> <span>Submit</span></button>
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                    </div>
-                </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th>Date Visit</th>
-                                        <th>Date Next Check-up</th>                  
-                                        <!-- <th>Age</th>    -->                
-                                        <th>Weight</th>                   
-                                        <th>Height</th>                   
-                                        <th>Diagnosis and Physician's Notes</th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($visit as $key => $v) : ?>
-                                        <tr>
-                                            <td><?= date('F d, Y', strtotime($v['date_visit']))?></td> 
-                                            <td><?= date('F d, Y', strtotime($v['date_next']))?></td>      
-                                           <!--  <td><?= $v['age']?></td>   -->    
-                                            <td><?= $v['weight']?></td>      
-                                            <td><?= $v['height']?></td>      
-                                            <td><?= $v['diagnosis_physician_notes']?></td>      
-                                        </tr>
-                                    <?php endforeach;?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-             </form>
-        </div>
-    </div>
-</div>
-<script src="<?=URL?>public/js/follow_up.js"></script>
+<script>
+    $(function(){
+        $('.nav-link').click(function(){
+            $(this).addClass('active');
+        })
+    })
+</script>

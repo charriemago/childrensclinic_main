@@ -65,12 +65,12 @@ class Patient_model extends Model
             $parent_id = $this->insertParent($patient_id);
             if($parent_id > 0) {
                 $birth_history_id = $this->insertBirthHistory($patient_id);
-                if($birth_history_id > 0) {
-                    $this->insertImmunizationRecord($patient_id);
-                    echo json_encode([
-                        'msg' => 'Record successfully saved'
-                    ]);
-                }
+                echo json_encode([
+                    'msg' => 'Record successfully saved'
+                ]);
+                // if($birth_history_id > 0) {
+                //     $this->insertImmunizationRecord($patient_id);
+                // }
             }
         }
 
@@ -89,26 +89,26 @@ class Patient_model extends Model
         //     echo 0;
         //     exit;
         // } 
-        foreach ($_POST['date_visit'] as $key => $each) {
-            $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
-            $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $date_visit, 'patient_id' => $patient_id));
+        // foreach ($_POST['date_visit'] as $key => $each) {
+        //     $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
+        //     $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $date_visit, 'patient_id' => $patient_id));
             
-            if(empty($validate_visit)) {
+        //     if(empty($validate_visit)) {
 
-                $data = [
-                    'patient_id' => $patient_id,
-                    'age' => 0,
-                    'weight' => $_POST['weight'][$key],
-                    'height' => $_POST['height'][$key],
-                    'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
-                    'date_visit' => $date_visit,
-                    'date_next' => $_POST['date_nextvisit'][$key],
-                    'created_by' => $this->user['id'],
-                    'date_created' => date('Y-m-d H:i:s')
-                ];
-                DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
-            }
-        }
+        //         $data = [
+        //             'patient_id' => $patient_id,
+        //             'age' => 0,
+        //             'weight' => $_POST['weight'][$key],
+        //             'height' => $_POST['height'][$key],
+        //             'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
+        //             'date_visit' => $date_visit,
+        //             'date_next' => $_POST['date_nextvisit'][$key],
+        //             'created_by' => $this->user['id'],
+        //             'date_created' => date('Y-m-d H:i:s')
+        //         ];
+        //         DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
+        //     }
+        // }
     }
 
     public function insertParent($patientId) {
