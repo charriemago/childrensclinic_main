@@ -155,12 +155,6 @@ class Patient_model extends Model
             $data = array(
                 'patient_id' => $patientId,
                 'vaccine_id' => $vaccine['id'],
-                '1st' => '',
-                '2nd' => '',
-                '3rd' => '',
-                'Booster_1' => '',
-                'Booster_2' => '',
-                'Booster_3' => '',
                 'reaction' => '',
                 'created_by' => $this->user['id']
             );
@@ -168,12 +162,11 @@ class Patient_model extends Model
         }
     }
     public function insertOtherImmunizationRecord($patientId) {
-        $vaccines = Vaccine_model::all();
+        $vaccines = Db::loadAll(DATABASE_NAME, 'tbl_other_fee');
         foreach($vaccines as $vaccine) {
             $data = array(
                 'patient_id' => $patientId,
                 'other_fee_id' => $vaccine['id'],
-                'date_shot' => '',
                 'reaction' => '',
                 'created_by' => $this->user['id']
             );
