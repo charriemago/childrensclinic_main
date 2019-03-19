@@ -134,7 +134,7 @@ class Patient_model extends Model
             'no_of_mos' => isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '',
             'weeks' => isset($_POST['weeks']) ? $_POST['weeks'] : '',
             'days' => isset($_POST['days']) ? $_POST['days'] : '',
-            'type_of_delivery' => isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '',
+            'type_of_delivery' => isset($_POST['typeofdelivery']) ? $_POST['typeofdelivery'] : '',
             'birth_weight' => isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '',
             'birth_length' => isset($_POST['birth_length']) ? $_POST['birth_length'] : '',
             'blood_type' => isset($_POST['blood_type']) ? $_POST['blood_type'] : '',

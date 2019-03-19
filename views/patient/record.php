@@ -1,7 +1,8 @@
 <?php
     $patient = $this->patient;
     $vaccines = $this->vaccines;
-
+    $delivery = array('Normal' => 'normal', 'Cesarean', 'cesarean');
+    $blood = array('0+','0-','A+','A-','B+','B-','AB+','AB-');
 ?>
 <style>
     .nav-standard{
@@ -116,9 +117,14 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-1 col-form-label">Type of Delivery</label>
                             <div class="col-sm-5">
-                                <input type="text" disabled class="form-control" name="type_of_delivery" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['type_of_delivery'] : '' ?>">
+                                <select class="form-control" name="typeofdelivery" disabled>
+                                    <option value="" required selected>Select Type of Delivery</option>
+                                    <?php foreach($delivery as $key=>$each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['type_of_delivery'] == $each ? 'selected' : '' ?>><?= $key?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <label for="inputPassword" class="col-sm-1 col-form-label">Chest Circumference</label>
+                            <label for="inputPassword" class="col-sm1-1 col-form-label">Chest Circumference</label>
                             <div class="col-sm-5">
                                 <input type="text" disabled class="form-control" name="chest_circumference" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['chest_circumference'] : '' ?>">
                             </div>
@@ -134,7 +140,12 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                             <div class="col-sm-1">
-                                <input type="text" disabled class="form-control" name="blood_type" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['blood_type'] : '' ?>">
+                                <select class="form-control" name="blood_type" disabled>
+                                    <option value="" required selected>Select Blood Type</option>
+                                    <?php foreach($blood as $each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['blood_type'] == $each ? 'selected' : '' ?>><?= $each?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                             <div class="col-sm-3">
