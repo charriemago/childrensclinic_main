@@ -170,7 +170,7 @@ class Patient_model extends Model
                 'reaction' => '',
                 'created_by' => $this->user['id']
             );
-            $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record', $data);
+            $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record_other', $data);
         }
     }
 
