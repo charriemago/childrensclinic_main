@@ -1,7 +1,17 @@
 <?php
     $patient = $this->patient;
     $vaccines = $this->vaccines;
+
 ?>
+<style>
+    .nav-standard{
+        cursor: pointer!important;
+        color: #007bff!important;
+    }
+    .nav-standard.active{
+        color: #fff!important;
+    }
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mt-4">
@@ -143,10 +153,10 @@
                         </div>
                         <hr>
                         <nav class="nav nav-pills nav-fill">
-                            <a class="nav-item nav-link" href="#">Medication</a>
-                            <a class="nav-item nav-link" href="#">Follow Up Visit</a>
-                            <a class="nav-item nav-link" href="#">Vaccine</a>
-                            <a class="nav-item nav-link" href="#">Other Vaccine</a>
+                            <a class="nav-item nav-link nav-standard" data-link="medication">Medication</a>
+                            <a class="nav-item nav-link nav-standard" data-link="followupvisit">Follow Up Visit</a>
+                            <a class="nav-item nav-link nav-standard" data-link="vaccine">Vaccine</a>
+                            <a class="nav-item nav-link nav-standard" data-link="othervaccine">Other Vaccine</a>
                         </nav>
                         <div class="returnModule">
                         </div>
@@ -161,7 +171,23 @@
 <script>
     $(function(){
         $('.nav-link').click(function(){
+            $('.nav-link').removeClass('active');
             $(this).addClass('active');
+            var link = $(this).attr('data-link');
+            var patient_id = "<?=$patient['id']?>";
+            if(link == 'medication'){
+                urlLink = 'patient/medication';
+            } else if(link == 'followupvisit') {
+                urlLink = 'patient/followupvisit';
+            } else if(link == 'vaccine') {
+                urlLink = 'patient/vaccine';
+            } else if(link == 'othervaccine') {
+                urlLink = 'patient/othervaccine';
+            }
+            $.post(URL + urlLink, {'id' : patient_id})
+            .done(function(returnData){
+                $('.returnModule').html(returnData);
+            })
         })
     })
 </script>

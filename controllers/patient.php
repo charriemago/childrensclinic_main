@@ -31,6 +31,27 @@ class Patient extends Controller
 		$this->view->vaccines = Vaccine_model::all();
 		$this->view->render('views/patient/add.php');
 	}   
+	public function medication()
+	{
+		$this->view->medication = $this->model->getMedication();
+		$this->view->render('views/patient/medication.php', true);
+	}   
+	public function vaccine()
+	{
+		$this->view->vaccines = Vaccine_model::all();
+		$this->view->render('views/patient/vaccine.php', true);
+	}   
+	public function othervaccine()
+	{
+		$this->view->vaccines = Db::loadAll(DATABASE_NAME, 'tbl_other_fee');
+		$this->view->render('views/patient/othervaccine.php', true);
+	}   
+	public function followupvisit()
+	{
+		$this->view->getId = $_POST['id'];
+		$this->view->allVisits = $this->model->allVisits($_POST['id']);
+		$this->view->render('views/patient/followupvisit.php', true);
+	}   
 
 	public function save()
 	{
@@ -44,6 +65,15 @@ class Patient extends Controller
 	public function delete()
 	{
 		$this->model->delete();
+	}
+	public function addMedication(){
+		$this->model->addMedication();
+	}
+	public function updateImmunizationRecord(){
+		$this->model->updateImmunizationRecord();
+	}
+	public function updateImmunizationRecordOther(){
+		$this->model->updateImmunizationRecordOther();
 	}
 
 }
