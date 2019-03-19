@@ -42,11 +42,11 @@ class Followup_model extends Model
                 $data = [
                     'patient_id' => $_POST['patient_id'],
                     'age' => 0,
-                    'weight' => $_POST['weight'][$key],
-                    'height' => $_POST['height'][$key],
+                    'weight' => isset($_POST['weight'][$key]) ? $_POST['weight'][$key] : '',
+                    'height' => isset($_POST['height'][$key]) ? $_POST['height'][$key] : '',
                     'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
-                    'date_visit' => $_POST['date_visit'][$key],
-                    'date_next' => $_POST['date_nextvisit'][$key],
+                    'date_visit' => isset($_POST['date_visit'][$key]) ? $_POST['date_visit'][$key] : '0000-00-00 00:00:00',
+                    'date_next' => isset($_POST['date_nextvisit'][$key]) ? $_POST['date_nextvisit'][$key]: '0000-00-00 00:00:00',
                     'created_by' => $this->user['id'],
                     'date_created' => date('Y-m-d H:i:s')
                 ];

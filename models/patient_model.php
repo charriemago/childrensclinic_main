@@ -277,12 +277,12 @@ class Patient_model extends Model
                 ];
                 unset($data['id']);
 
-                $updateRecord['1st'] = isset($_POST['1st'][$vaccine['id']]) ? $_POST['1st'][$vaccine['id']] : NULL;
-                $updateRecord['2nd'] = isset($_POST['2nd'][$vaccine['id']]) ? $_POST['2nd'][$vaccine['id']] : NULL;
-                $updateRecord['3rd'] = isset($_POST['3rd'][$vaccine['id']]) ? $_POST['3rd'][$vaccine['id']] : NULL;
-                $updateRecord['Booster_1'] = isset($_POST['Booster_1'][$vaccine['id']]) ? $_POST['Booster_1'][$vaccine['id']] : NULL;
-                $updateRecord['Booster_2'] = isset($_POST['Booster_2'][$vaccine['id']]) ? $_POST['Booster_2'][$vaccine['id']] : NULL;
-                $updateRecord['Booster_3'] = isset($_POST['Booster_3'][$vaccine['id']]) ? $_POST['Booster_3'][$vaccine['id']] : NULL;
+                $updateRecord['1st'] = isset($_POST['1st'][$vaccine['id']]) ? $_POST['1st'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['2nd'] = isset($_POST['2nd'][$vaccine['id']]) ? $_POST['2nd'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['3rd'] = isset($_POST['3rd'][$vaccine['id']]) ? $_POST['3rd'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_1'] = isset($_POST['Booster_1'][$vaccine['id']]) ? $_POST['Booster_1'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_2'] = isset($_POST['Booster_2'][$vaccine['id']]) ? $_POST['Booster_2'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_3'] = isset($_POST['Booster_3'][$vaccine['id']]) ? $_POST['Booster_3'][$vaccine['id']] : '0000-00-00 00:00:00';
                 $updateRecord['reaction'] = $_POST['reaction'][$vaccine['id']];
                 $updateRecord['modified_by'] = $this->user['id'];
                 $updateRecord['date_modified'] = date('Y-m-d H:i:s');
@@ -291,12 +291,12 @@ class Patient_model extends Model
                 $data = array(
                     'patient_id' => $patientId,
                     'vaccine_id' => $vaccine['id'],
-                    '1st' => isset($_POST['1st'][$vaccine['id']]) ? $_POST['1st'][$vaccine['id']] : NULL,
-                    '2nd' => isset($_POST['2nd'][$vaccine['id']]) ? $_POST['2nd'][$vaccine['id']] : NULL,
-                    '3rd' => isset($_POST['3rd'][$vaccine['id']]) ? $_POST['3rd'][$vaccine['id']] : NULL,
-                    'Booster_1' => isset($_POST['Booster_1'][$vaccine['id']]) ? $_POST['Booster_1'][$vaccine['id']] : NULL,
-                    'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? $_POST['Booster_2'][$vaccine['id']] : NULL,
-                    'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? $_POST['Booster_3'][$vaccine['id']] : NULL,
+                    '1st' => isset($_POST['1st'][$vaccine['id']]) ? $_POST['1st'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    '2nd' => isset($_POST['2nd'][$vaccine['id']]) ? $_POST['2nd'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    '3rd' => isset($_POST['3rd'][$vaccine['id']]) ? $_POST['3rd'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_1' => isset($_POST['Booster_1'][$vaccine['id']]) ? $_POST['Booster_1'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? $_POST['Booster_2'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? $_POST['Booster_3'][$vaccine['id']] : '0000-00-00 00:00:00',
                     'reaction' => $_POST['reaction'][$vaccine['id']],
                     'created_by' => $this->user['id']
                 );
@@ -320,7 +320,7 @@ class Patient_model extends Model
                 ];
                 unset($data['id']);
 
-                $updateRecord['date_shot'] = isset($_POST['date_shot'][$vaccine['id']]) ? $_POST['date_shot'][$vaccine['id']] : NULL;
+                $updateRecord['date_shot'] = isset($_POST['date_shot'][$vaccine['id']]) ? $_POST['date_shot'][$vaccine['id']] : '0000-00-00 00:00:00';
                 $updateRecord['reaction'] = $_POST['reaction'][$vaccine['id']];
                 $updateRecord['modified_by'] = $this->user['id'];
                 $updateRecord['date_modified'] = date('Y-m-d H:i:s');
@@ -329,7 +329,7 @@ class Patient_model extends Model
                 $data = array(
                     'patient_id' => $patientId,
                     'other_fee_id' => $vaccine['id'],
-                    'date_shot' => isset($_POST['date_shot'][$vaccine['id']]) ? $_POST['date_shot'][$vaccine['id']] : NULL,
+                    'date_shot' => isset($_POST['date_shot'][$vaccine['id']]) ? $_POST['date_shot'][$vaccine['id']] : '0000-00-00 00:00:00',
                     'reaction' => $_POST['reaction'][$vaccine['id']],
                     'created_by' => $this->user['id']
                 );
