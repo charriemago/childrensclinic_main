@@ -34,12 +34,12 @@
                                 <tbody>
                                     <?php foreach ($visit as $key => $v) : ?>
                                         <?php 
-                                            $dateVisit = $v['date_visit'] != '' || $v['date_visit'] != '0000-00-00 00:00:00' ? explode(" ",$v['date_visit']) : ''; 
-                                            $dateNext = $v['date_next'] != '' || $v['date_next']  != '0000-00-00 00:00:00' ? explode(" ",$v['date_next']) : '';
+                                            $dateVisit = $v['date_visit'] != '' && $v['date_visit'] != '0000-00-00 00:00:00' ? explode(" ",$v['date_visit']) : '';
+                                            $dateNext = $v['date_next'] != '' && $v['date_next'] != '0000-00-00 00:00:00' ? explode(" ",$v['date_next']) : '';
                                         ?>
                                         <tr>
                                             <td><input class="form-control" type="datetime-local" name="date_visit[]" value="<?= $dateVisit != '' ? $dateVisit[0].'T'.$dateVisit[1] : ''?>"></td> 
-                                            <td><input class="form-control" type="datetime-local" name="date_nextvisit[]" value="<?= $dateVisit != '' ? $dateVisit[0].'T'.$dateVisit[1] : ''?>"></td> 
+                                            <td><input class="form-control" type="datetime-local" name="date_nextvisit[]" value="<?= $dateNext != '' ? $dateNext[0].'T'.$dateNext[1] : ''?>"></td> 
                                             <td><input class="form-control" type="text" name="weight[]" value="<?= $v['weight']?>"></td>      
                                             <td><input class="form-control" type="text" name="height[]" value="<?= $v['height']?>"></td>      
                                             <td><input class="form-control" type="text" name="diagnosis[]" value="<?= $v['diagnosis_physician_notes']?>"></td>      

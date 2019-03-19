@@ -35,12 +35,12 @@
                                     <?php foreach ($vaccines as $key => $vaccine) : ?>
                                         <?php $immune = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record', array('patient_id' => $_POST['id'], 'vaccine_id' => $vaccine['id']));?>
                                         <?php
-                                            $i1st = $immune[0]['1st'] != '' || $immune[0]['1st'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['1st']) : '';
-                                            $i2nd = $immune[0]['2nd'] != '' || $immune[0]['2nd'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['2nd']) : '';
-                                            $i3rd = $immune[0]['3rd'] != '' || $immune[0]['3rd'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['3rd']) : '';
-                                            $Booster1 = $immune[0]['Booster_1'] != '' || $immune[0]['Booster_1'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_1']) : '';
-                                            $Booster2 = $immune[0]['Booster_2'] != '' || $immune[0]['Booster_2'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_2']) : '';
-                                            $Booster3 = $immune[0]['Booster_3'] != '' || $immune[0]['Booster_3'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_3']) : '';
+                                            $i1st = $immune[0]['1st'] != '' && $immune[0]['1st'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['1st']) : '';
+                                            $i2nd = $immune[0]['2nd'] != '' && $immune[0]['2nd'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['2nd']) : '';
+                                            $i3rd = $immune[0]['3rd'] != '' && $immune[0]['3rd'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['3rd']) : '';
+                                            $Booster1 = $immune[0]['Booster_1'] != '' && $immune[0]['Booster_1'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_1']) : '';
+                                            $Booster2 = $immune[0]['Booster_2'] != '' && $immune[0]['Booster_2'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_2']) : '';
+                                            $Booster3 = $immune[0]['Booster_3'] != '' && $immune[0]['Booster_3'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['Booster_3']) : '';
                                         ?>
                                         <tr>
                                             <td class="text-standard">

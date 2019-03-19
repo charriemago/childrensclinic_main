@@ -30,7 +30,7 @@
                                 <?php foreach ($vaccines as $key => $vaccine) : ?>
                                     <?php $immune = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record_other', array('patient_id' => $_POST['id'], 'other_fee_id' => $vaccine['id']));?>
                                     <?php
-                                        $dateShot = $immune[0]['date_shot'] != '' || $immune[0]['date_shot'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['date_shot']) : '';
+                                        $dateShot = $immune[0]['date_shot'] != '' && $immune[0]['date_shot'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['date_shot']) : '';
                                     ?>
                                     <tr>
                                        <td class="text-standard">
