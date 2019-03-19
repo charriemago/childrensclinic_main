@@ -169,9 +169,9 @@
     $(function(){
         $('input[name="birthday"]').blur(function(){
             var date = $(this).val();
-            var days = datediff(date,dateToday());
-            var months = Math.ceil(parseInt(days) * 0.0328767);
-            var weeks = Math.ceil(parseInt(months) * 4.34524);
+            var days = datediff(date,dateToday()) + 1;
+            var months = Math.floor(parseInt(days) * 0.0328767);
+            var weeks = Math.floor(parseInt(months) * 4.34524);
             $('input[name="no_of_mos"]').val(months);
             $('input[name="weeks"]').val(weeks);
             $('input[name="days"]').val(days);

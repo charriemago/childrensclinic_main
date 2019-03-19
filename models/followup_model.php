@@ -32,6 +32,7 @@ class Followup_model extends Model
         //     exit;
         // }
         Db::delete(DATABASE_NAME, 'tbl_follow_up_visit', array('patient_id' => $_POST['patient_id'])); 
+        
         foreach ($_POST['date_visit'] as $key => $each) {
             
             // $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
@@ -53,7 +54,13 @@ class Followup_model extends Model
                 DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
             // }
         }
-        echo 1;
+        $sql = "SELECT * FROM tbl_follow_up_visit WHERE patient_id = ".$_POST['patient_id']." ORDER BY date_visit DESC";
+        $check = Db::querySelect(DATABASE_NAME, $sql);
+        
+        $birth = Db::selectByColumn(DATABASE_NAME, 'tbl_birth_history', array('patient_id' => $_POST['patient_id']));
+        $updateRecord['birth_weight'] = $check[0]['weight'] == '' ? $birth[0]['birth_weight'] : $check[0]['weight'];
+        $updateRecord['birth_length'] = $check[0]['height'] == '' ? $birth[0]['birth_length'] : $check[0]['height'];
+        Db::update(DATABASE_NAME, 'tbl_birth_history', $updateRecord, array('patient_id' => $_POST['patient_id']));
     }
     
     public function allVisits($id) {
