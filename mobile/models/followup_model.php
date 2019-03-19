@@ -30,12 +30,15 @@ class Followup_model extends Model
         // if(strpos($result, '0') !== false) {
         //     echo 0;
         //     exit;
-        // } 
+        // }
+        Db::delete(DATABASE_NAME, 'tbl_follow_up_visit', array('patient_id' => $_POST['patient_id'])); 
+        
         foreach ($_POST['date_visit'] as $key => $each) {
-            $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
-            $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $each, 'patient_id' => $_POST['patient_id']));
             
-            if(empty($validate_visit)) {
+            // $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
+            // $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $each, 'patient_id' => $_POST['patient_id']));
+            
+            // if(empty($validate_visit)) {
 
                 $data = [
                     'patient_id' => $_POST['patient_id'],
@@ -43,14 +46,21 @@ class Followup_model extends Model
                     'weight' => $_POST['weight'][$key],
                     'height' => $_POST['height'][$key],
                     'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
-                    'date_visit' => $date_visit,
-                    'date_next' => $_POST['date_nextvisit'][$key],
+                    'date_visit' => $_POST['date_visit'][$key] != '' ? $_POST['date_visit'][$key] : '0000-00-00 00:00:00',
+                    'date_next' => $_POST['date_nextvisit'][$key] != '' ? $_POST['date_nextvisit'][$key] : '0000-00-00 00:00:00',
                     'created_by' => $this->user['id'],
                     'date_created' => date('Y-m-d H:i:s')
                 ];
                 DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
-            }
+            // }
         }
+        $sql = "SELECT * FROM tbl_follow_up_visit WHERE patient_id = ".$_POST['patient_id']." ORDER BY date_visit DESC";
+        $check = Db::querySelect(DATABASE_NAME, $sql);
+        
+        $birth = Db::selectByColumn(DATABASE_NAME, 'tbl_birth_history', array('patient_id' => $_POST['patient_id']));
+        $updateRecord['birth_weight'] = $check[0]['weight'] == '' ? $birth[0]['birth_weight'] : $check[0]['weight'];
+        $updateRecord['birth_length'] = $check[0]['height'] == '' ? $birth[0]['birth_length'] : $check[0]['height'];
+        Db::update(DATABASE_NAME, 'tbl_birth_history', $updateRecord, array('patient_id' => $_POST['patient_id']));
         echo 1;
     }
     

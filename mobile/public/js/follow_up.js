@@ -21,11 +21,11 @@ function addNewLine() {
     $('.btn-add-line').bind('click', function () {
         var newLine = `
             <tr>
-                <td><input class="form-control" type="date" name="date_visit[]" required="required"></td>      
-                <td><input class="form-control" type="date" name="date_nextvisit[]" required="required"></td>
-                <td><input class="form-control" type="text" name="weight[]" required="required"></td>      
-                <td><input class="form-control" type="text" name="height[]" required="required"></td>      
-                <td><input class="form-control" type="text" name="diagnosis[]" required="required"></td>
+                <td><input class="form-control" type="datetime-local" name="date_visit[]" required></td>      
+                <td><input class="form-control" type="datetime-local" name="date_nextvisit[]"></td>
+                <td><input class="form-control" type="text" name="weight[]"></td>      
+                <td><input class="form-control" type="text" name="height[]"></td>      
+                <td><input class="form-control" type="text" name="diagnosis[]"></td>
                 <td><a class="btn-delete"><i class="ti-trash text-danger"></i></a></td>
             </tr>
         `;
@@ -40,7 +40,6 @@ function addNewLine() {
 function addVisits() {
     $('.form-add-visit').submit(function(){
         let form = $(this).serialize();
-        
         validateForm("Are you sure you want to add this data?" , function() {
             $.post(URL + 'followup/save', form)
             .done(function(result) {

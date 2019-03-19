@@ -1,7 +1,18 @@
 <?php
     $patient = $this->patient;
     $vaccines = $this->vaccines;
+    $delivery = array('Normal' => 'normal', 'Cesarean', 'cesarean');
+    $blood = array('0+','0-','A+','A-','B+','B-','AB+','AB-');
 ?>
+<style>
+    .nav-standard{
+        cursor: pointer!important;
+        color: #007bff!important;
+    }
+    .nav-standard.active{
+        color: #fff!important;
+    }
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mt-4">
@@ -37,7 +48,7 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Birthday</label>
                             <div class="col-sm-5">
-                                <input type="text" disabled class="form-control" value="<?=$patient['birthday']?>" name="birthday" max="<?=date('Y-m-d')?>">
+                                <input type="date" disabled class="form-control" value="<?=$patient['birthday']?>" name="birthday" max="<?=date('Y-m-d')?>">
                             </div>
                         </div> 
                         <hr>
@@ -106,9 +117,14 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-1 col-form-label">Type of Delivery</label>
                             <div class="col-sm-5">
-                                <input type="text" disabled class="form-control" name="type_of_delivery" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['type_of_delivery'] : '' ?>">
+                                <select class="form-control" name="typeofdelivery" disabled>
+                                    <option value="" required selected>Select Type of Delivery</option>
+                                    <?php foreach($delivery as $key=>$each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['type_of_delivery'] == $each ? 'selected' : '' ?>><?= $key?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <label for="inputPassword" class="col-sm-1 col-form-label">Chest Circumference</label>
+                            <label for="inputPassword" class="col-sm1-1 col-form-label">Chest Circumference</label>
                             <div class="col-sm-5">
                                 <input type="text" disabled class="form-control" name="chest_circumference" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['chest_circumference'] : '' ?>">
                             </div>
@@ -124,7 +140,12 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                             <div class="col-sm-1">
-                                <input type="text" disabled class="form-control" name="blood_type" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['blood_type'] : '' ?>">
+                                <select class="form-control" name="blood_type" disabled>
+                                    <option value="" required selected>Select Blood Type</option>
+                                    <?php foreach($blood as $each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['blood_type'] == $each ? 'selected' : '' ?>><?= $each?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                             <div class="col-sm-3">
@@ -141,39 +162,14 @@
                                 <input required disabled type="text" class="form-control" name="medication_notes" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['medication_notes'] : '' ?>">
                             </div>
                         </div>
-                        <h6 class="mb-4 mt-5" style="font-weight: 700">Immunization Record</h6>
-                        <div class="table-responsive">
-                            <table class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th><strong>Vaccine</strong></th>                  
-                                        <th>1st</th>                   
-                                        <th>2nd</th>                   
-                                        <th>3rd</th>                   
-                                        <th>Booster 1</th>                   
-                                        <th>Booster 2</th>                   
-                                        <th>Booster 3</th>                   
-                                        <th>Reaction</th>                                                   
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($vaccines as $key => $vaccine) : ?>
-                                        <?php $immune = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record', array('patient_id' => $this->patient_id, 'vaccine_id' => $vaccine['id']));?>
-                                        <tr>
-                                            <td class="text-standard">
-                                                <strong><?=$vaccine['vaccine']?></strong>
-                                            </td>      
-                                            <td><input type="checkbox" name="1st[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['1st'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="2nd[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['2nd'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="3rd[<?=$vaccine['id']?>]" <?= !empty($immune[0]) && $immune[0]['3rd'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_1[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_1'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_2[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_2'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><input type="checkbox" name="Booster_3[<?=$vaccine['id']?>]" <?=!empty($immune[0]) &&  $immune[0]['Booster_3'] == 1 ? 'checked' : '' ?>></td>      
-                                            <td><textarea disabled class="form-control" name="reaction[<?=$vaccine['id']?>]" rows="2"><?= !empty($immune[0]) ? $immune[0]['reaction'] : '' ?></textarea></td>              
-                                        </tr>
-                                    <?php endforeach;?> 
-                                </tbody>
-                            </table>
+                        <hr>
+                        <nav class="nav nav-pills nav-fill">
+                            <a class="nav-item nav-link nav-standard" data-link="medication">Medication</a>
+                            <a class="nav-item nav-link nav-standard" data-link="followupvisit">Follow Up Visit</a>
+                            <a class="nav-item nav-link nav-standard" data-link="vaccine">Vaccine</a>
+                            <a class="nav-item nav-link nav-standard" data-link="othervaccine">Other Vaccine</a>
+                        </nav>
+                        <div class="returnModule">
                         </div>
                     </div>
                 </div>
@@ -183,58 +179,76 @@
 </div>
 <script src="<?=URL?>public/js/patient.js"></script>
 
+<script>
+    $(function(){
+        $('.nav-link').click(function(){
+            $('.nav-link').removeClass('active');
+            $(this).addClass('active');
+            var link = $(this).attr('data-link');
+            var patient_id = "<?=$patient['id']?>";
+            if(link == 'medication'){
+                urlLink = 'patient/medication';
+            } else if(link == 'followupvisit') {
+                urlLink = 'patient/followupvisit';
+            } else if(link == 'vaccine') {
+                urlLink = 'patient/vaccine';
+            } else if(link == 'othervaccine') {
+                urlLink = 'patient/othervaccine';
+            }
+            $.post(URL + urlLink, {'id' : patient_id})
+            .done(function(returnData){
+                $('.returnModule').html(returnData);
+            })
+        })
+        $('input[name="birthday"]').blur(function(){
+            var date = $(this).val();
+            var days = datediff(date,dateToday()) + 1;
+            var months = Math.floor(parseInt(days) * 0.0328767);
+            var weeks = Math.floor(parseInt(months) * 4.34524);
+            $('input[name="no_of_mos"]').val(months);
+            $('input[name="weeks"]').val(weeks);
+            $('input[name="days"]').val(days);
+        })
+        
+        function datediff(first, second) {
+            var first = first.split('-');
+            var second = second.split('-');
+            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date(first[0],first[1],first[2]);
+            var secondDate = new Date(second[0],second[1],second[2]);
 
-<?php 
-    $id = $this->getId;
-    $visit = $this->allVisits;
-?>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-visit" method="POST">
-                <input type="hidden" name="patient_id" value="<?= $id?>">
-                <div class=" clearfix">
-                    <div class="float-left">
-                        <h5 class="float-left"> Follow-Up Visits</h5>
-                    </div>
-                    <div class="float-right">
-                        <button type="submit" class="btn btn-standard-success btn-sm"><i class="pe-7s-paper-plane pe-lg"></i> <span>Submit</span></button>
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                    </div>
-                </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-visits" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                        <th>Date Visit</th>
-                                        <th>Date Next Check-up</th>                  
-                                        <!-- <th>Age</th>    -->                
-                                        <th>Weight</th>                   
-                                        <th>Height</th>                   
-                                        <th>Diagnosis and Physician's Notes</th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($visit as $key => $v) : ?>
-                                        <tr>
-                                            <td><?= date('F d, Y', strtotime($v['date_visit']))?></td> 
-                                            <td><?= date('F d, Y', strtotime($v['date_next']))?></td>      
-                                           <!--  <td><?= $v['age']?></td>   -->    
-                                            <td><?= $v['weight']?></td>      
-                                            <td><?= $v['height']?></td>      
-                                            <td><?= $v['diagnosis_physician_notes']?></td>      
-                                        </tr>
-                                    <?php endforeach;?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-             </form>
-        </div>
-    </div>
-</div>
-<script src="<?=URL?>public/js/follow_up.js"></script>
+            var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+            return diffDays;
+        }
+        function dateToday(){
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            return d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
+            (day<10 ? '0' : '') + day;
+        }
+        // function humanise (diff) {
+        //     // The string we're working with to create the representation
+        //     var str = '';
+        //     // Map lengths of `diff` to different time periods
+        //     var values = [[' year', 365], [' month', 30], [' day', 1]];
+
+        //     // Iterate over the values...
+        //     for (var i=0;i<values.length;i++) {
+        //         var amount = Math.floor(diff / values[i][1]);
+
+        //         // ... and find the largest time value that fits into the diff
+        //         if (amount >= 1) {
+        //         // If we match, add to the string ('s' is for pluralization)
+        //         str += amount + values[i][0] + (amount > 1 ? 's' : '') + ' ';
+
+        //         // and subtract from the diff
+        //         diff -= amount * values[i][1];
+        //         }
+        //     }
+
+        //     return str;
+        // }
+    })
+</script>

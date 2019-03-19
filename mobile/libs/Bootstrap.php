@@ -16,11 +16,11 @@ class Bootstrap {
         
         $file = isset($arrayLink[2]) ? $arrayLink[2] : 'index';
 
-		// if(Session::getSession('user') == '' && $class != 'user')
-		// {
-		// 	$function = $class;
-		// 	$class = 'home';
-		// }
+		if(Session::getSession('user') == '' && $class != 'user')
+		{
+			$function = $class;
+			$class = 'home';
+		}
            
 		
         $path = 'controllers/' . $class . '.php';

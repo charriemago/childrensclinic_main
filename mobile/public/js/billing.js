@@ -10,6 +10,13 @@ $(function(){
         })
         return false;
     });
+    $('select[name="patient"]').change(function(){
+        var id = $(this).val();
+        $.post(URL + 'billing/details', {'id': id})
+        .done(function(returnData){
+            $('.returnDetails').html(returnData);
+        })
+    })
     $('.bill-vacc').change(function(){
         var value = $(this).attr('data-amount');
         var totalValue = $(this).closest('tr').find('td.totalVaccineBill .inputTotalVaccineBill').val();
@@ -70,24 +77,7 @@ $(function(){
 
 
     })
-    $('input[name="add_fee"]').blur(function(){
-        var total = 0;
-        $('.inputTotalVaccineBill').each(function(){
-            var value = $(this).val();
-            total += parseInt(value); 
-        });
-        $('.bill-other-amount').each(function(){
-            var value3 = $(this).val();
-            total += parseInt(value3); 
-        });
-        
-        var fee = $('input[name="doc_fee"]').val();
-        var add = $('input[name="add_fee"]').val();
-        let superTotal = total+parseInt(fee)+parseInt(add);
-        $('#superTotal').text('P '+superTotal.toFixed(2));
-
-
-    })
+    
     $('.btn-export').click(function(){
         let tabledata = `
 			<style>
