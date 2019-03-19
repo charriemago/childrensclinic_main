@@ -71,7 +71,7 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="<?= URL?>vaccine">Vaccines Fee</a>
 						<a class="dropdown-item" href="<?= URL?>fee">Consultation Fee</a>
-						<a class="dropdown-item" href="<?= URL?>fee/other">Others Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee/other">Other Vaccinces Fee</a>
 					</div>
 				</li>
 			</ul>

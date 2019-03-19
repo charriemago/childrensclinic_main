@@ -49,11 +49,11 @@ class Billing_model extends Model
         $bill_id = Db::insert(DATABASE_NAME, 'tbl_billing', $data);
         
         foreach($_POST['vaccine'] as $key => $each){
-            $record = implode(',', $_POST['bill_'.$each]);
+            // $record = implode(',', $_POST['bill_'.$each]);
             $datas = array(
                 'billing_id' => $bill_id,
                 'vaccine_id' => $each,
-                'record_value' => $record,
+                'record_value' => '',
                 // 'bill' => isset($_POST['bill_'.$each]) && !empty($_POST['bill_'.$each]) ? $_POST['bill_'.$each] : 0,
                 'bill' => $_POST['inputTotalVaccineBill'][$key],
                 'created_by' => $this->user['id']
@@ -67,13 +67,16 @@ class Billing_model extends Model
             // );
             // Db::insert(DATABASE_NAME, 'tbl_billing_vaccine', $datas);
         }
-        foreach($_POST['other_fee'] as $key => $each){
-            $datas = array(
-                'billing_id' => $bill_id,
-                'other_fee_id' => $each,
-                'created_by' => $this->user['id']
-            );
+        $other = Db::loadAll(DATABASE_NAME, 'tbl_other_fee');
+        foreach($other as $key => $each){
+            if($_POST['bill_other_amount'][$key] != '0'){
+                $datas = array(
+                    'billing_id' => $bill_id,
+                    'other_fee_id' => $each,
+                    'created_by' => $this->user['id']
+                );
             Db::insert(DATABASE_NAME, 'tbl_billing_other', $datas);
+            }
         }
     }
 }

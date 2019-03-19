@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-vaccine" method="POST">
+            <form class="form-standard form-add-vaccine" method="POST"  class="form-standard">
                 <input class="form-control" type="hidden" value="<?=$_POST['id']?>" name="patient_id">
                 <div class=" clearfix">
                     <div class="float-left">
@@ -30,7 +30,7 @@
                                 <?php foreach ($vaccines as $key => $vaccine) : ?>
                                     <?php $immune = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record_other', array('patient_id' => $_POST['id'], 'other_fee_id' => $vaccine['id']));?>
                                     <?php
-                                        $dateShot = $immune[0]['date_shot'] != '' ? explode(" ",$immune[0]['date_shot']) : '';
+                                        $dateShot = $immune[0]['date_shot'] != '' || $immune[0]['date_shot'] != '0000-00-00 00:00:00' ? explode(" ",$immune[0]['date_shot']) : '';
                                     ?>
                                     <tr>
                                        <td class="text-standard">
@@ -53,16 +53,15 @@
     $(function(){
         $('.form-add-vaccine').submit(function(){
             var form = $(this).serialize();
-            if(confirm('Are you sure you want to save this data?')){
+            validateForm("Are you sure you want to add this data?" , function() {
                 $.post(URL + 'patient/updateImmunizationRecordOther', form)
                 .done(function(returnData){
                     alert('Saved Successfull');
                     location.reload();
                 })
                 return false;
-            } else {
-                return false;
-            }
+            });
+            return false;
         })
     })
 </script>

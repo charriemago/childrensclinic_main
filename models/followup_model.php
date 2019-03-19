@@ -30,12 +30,14 @@ class Followup_model extends Model
         // if(strpos($result, '0') !== false) {
         //     echo 0;
         //     exit;
-        // } 
+        // }
+        Db::delete(DATABASE_NAME, 'tbl_follow_up_visit', array('patient_id' => $_POST['patient_id'])); 
         foreach ($_POST['date_visit'] as $key => $each) {
-            $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
-            $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $each, 'patient_id' => $_POST['patient_id']));
             
-            if(empty($validate_visit)) {
+            // $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
+            // $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $each, 'patient_id' => $_POST['patient_id']));
+            
+            // if(empty($validate_visit)) {
 
                 $data = [
                     'patient_id' => $_POST['patient_id'],
@@ -43,13 +45,13 @@ class Followup_model extends Model
                     'weight' => $_POST['weight'][$key],
                     'height' => $_POST['height'][$key],
                     'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
-                    'date_visit' => $date_visit,
+                    'date_visit' => $_POST['date_visit'][$key],
                     'date_next' => $_POST['date_nextvisit'][$key],
                     'created_by' => $this->user['id'],
                     'date_created' => date('Y-m-d H:i:s')
                 ];
                 DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
-            }
+            // }
         }
         echo 1;
     }

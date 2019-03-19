@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mt-4">
-            <form class="form-standard form-add-medication" method="POST">
+            <form class="form-standard form-add-medication" method="POST" class="form-standard">
                 <input class="form-control" type="hidden" value="<?=$_POST['id']?>" name="patient_id">
                 <div class=" clearfix">
                     <div class="float-left">
@@ -58,16 +58,15 @@
         addNewLine()
         $('.form-add-medication').submit(function(){
             var form = $(this).serialize();
-            if(confirm('Are you sure you want to save this data?')){
+            validateForm("Are you sure you want to add this data?" , function() {
                 $.post(URL + 'patient/addMedication', form)
                 .done(function(returnData){
                     alert('Saved Successfull');
                     location.reload();
                 })
                 return false;
-            } else {
-                return false;
-            }
+            });
+            return false;
         })
     })
     function addNewLine() {

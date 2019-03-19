@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12 mt-4">
             <form class="form-standard form-add-visit" method="POST">
-                <input type="hidden" name="patient_id" value="<?= $id?>">
+                <input type="hidden" name="patient_id" value="<?= $id?>" class="form-standard">
                 <div class=" clearfix">
                     <div class="float-left">
                         <h5 class="float-left"> Follow-Up Visits</h5>
@@ -33,13 +33,16 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($visit as $key => $v) : ?>
+                                        <?php 
+                                            $dateVisit = $v['date_visit'] != '' || $v['date_visit'] != '0000-00-00 00:00:00' ? explode(" ",$v['date_visit']) : ''; 
+                                            $dateNext = $v['date_next'] != '' || $v['date_next']  != '0000-00-00 00:00:00' ? explode(" ",$v['date_next']) : '';
+                                        ?>
                                         <tr>
-                                            <td><?= date('F d, Y', strtotime($v['date_visit']))?></td> 
-                                            <td><?= date('F d, Y', strtotime($v['date_next']))?></td>      
-                                           <!--  <td><?= $v['age']?></td>   -->    
-                                            <td><?= $v['weight']?></td>      
-                                            <td><?= $v['height']?></td>      
-                                            <td><?= $v['diagnosis_physician_notes']?></td>      
+                                            <td><input class="form-control" type="datetime-local" name="date_visit[]" value="<?= $dateVisit != '' ? $dateVisit[0].'T'.$dateVisit[1] : ''?>"></td> 
+                                            <td><input class="form-control" type="datetime-local" name="date_nextvisit[]" value="<?= $dateVisit != '' ? $dateVisit[0].'T'.$dateVisit[1] : ''?>"></td> 
+                                            <td><input class="form-control" type="text" name="weight[]" value="<?= $v['weight']?>"></td>      
+                                            <td><input class="form-control" type="text" name="height[]" value="<?= $v['height']?>"></td>      
+                                            <td><input class="form-control" type="text" name="diagnosis[]" value="<?= $v['diagnosis_physician_notes']?>"></td>      
                                         </tr>
                                     <?php endforeach;?>
                                 </tbody>
