@@ -61,6 +61,7 @@ class Followup_model extends Model
         $updateRecord['birth_weight'] = $check[0]['weight'] == '' ? $birth[0]['birth_weight'] : $check[0]['weight'];
         $updateRecord['birth_length'] = $check[0]['height'] == '' ? $birth[0]['birth_length'] : $check[0]['height'];
         Db::update(DATABASE_NAME, 'tbl_birth_history', $updateRecord, array('patient_id' => $_POST['patient_id']));
+        echo 1;
     }
     
     public function allVisits($id) {
