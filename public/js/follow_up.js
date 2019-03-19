@@ -43,7 +43,6 @@ function addVisits() {
         validateForm("Are you sure you want to add this data?" , function() {
             $.post(URL + 'followup/save', form)
             .done(function(result) {
-                alert(result);
                 if(result === '1') {
                     alert('Follow up Successfully Saved.');
                     location.reload();
