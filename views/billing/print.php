@@ -4,15 +4,58 @@
     $bill = $this->bills;
     $billid = $this->billid;
 ?>
+<?php
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Children's Clinic</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="<?=URL?>public/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?=URL?>public/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/pe-icon/css/pe-icon-7-stroke.css" />
+	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/pe-icon/css/helper.css" />
+	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/themify-icons/themify-icons.css" />
+	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/datatables/datatables.min.css"/>
+	<link rel="stylesheet" href="<?=URL?>public/css/main.css">
+	<link rel="stylesheet" type="text/css"  href="<?=URL?>public/bootstrap-select/css/bootstrap-select.css">
+	<script src="<?=URL?>public/js/jquery.min.js"></script>
+	<script src="<?=URL?>public/js/popper.min.js"></script>
+	<script src="<?=URL?>public/js/bootstrap.min.js"></script>
+	<script src="<?=URL?>public/js/global.js"></script>
+	<script src="<?= URL;?>public/datatables/datatables.min.js"></script>
+	<script src="<?= URL;?>public/bootstrap-select/js/bootstrap-select.js"></script>
+	<script>
+		const URL = '<?=URL?>';
+	</script>
+
+		<script>
+			window.onload = () => {
+	    	let el = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+            el.parentNode.removeChild(el);
+            
+		}
+        window.print();
+		</script>
+    <style>
+        @media print {
+            @page { margin: 0; }
+            body { margin: 1.6cm; }
+        }
+    </style>
+</head>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 mt-4">
             <div class=" clearfix">
                 <div class="float-left">
-                    <h5 class="float-left"> Bill Record</h5>
+                    <h5 class="float-left" style="font-weight: 800"> Children's Clinic</h5>
                 </div>
                 <div class="float-right">
-                    <a class="btn btn-standard-success btn-sm" target="_blank" href="<?= URL?>billing/print/<?= $billid?>"><i class="pe-7s-print pe-lg"></i> <span>Print</span></a>
                 </div>
             </div><hr>
             <form class="form-standard" id="addForm">
@@ -77,22 +120,24 @@
                             </tbody>
                         </table>
                         <h6 class="mb-4 mt-5" style="font-weight: 700"></h6>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Consulation Fee</label>
-                            <div class="col-sm-10">
-                                <input disabled class="form-control" type="text" name="doc_fee" value="<?= !empty($bill[0]['doctors_fee']) ? number_format($bill[0]['doctors_fee'],2) : 0.00?>">
+                        <div class="col-lg-7 offset-lg-5">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Consulation Fee</label>
+                                <div class="col-sm-10">
+                                    <input disabled class="form-control" type="text" name="doc_fee" value="<?= !empty($bill[0]['doctors_fee']) ? number_format($bill[0]['doctors_fee'],2) : 0.00?>">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Addtional Fee</label>
-                            <div class="col-sm-10">
-                                <input disabled class="form-control" type="text" name="add_fee" value="<?= !empty($bill[0]['add_fee']) ? number_format($bill[0]['add_fee'],2) : 0.00?>">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Addtional Fee</label>
+                                <div class="col-sm-10">
+                                    <input disabled class="form-control" type="text" name="add_fee" value="<?= !empty($bill[0]['add_fee']) ? number_format($bill[0]['add_fee'],2) : 0.00?>">
+                                </div>
                             </div>
-                        </div>
-                        <hr>
-                        <div class="text-right mt-2 mb-2">
-                            <span style="font-weight: bolder; font-size: 20px;">Total Fees:</span> 
-                            <span class="total_fee" style="font-size: 20px;">P <?= !empty($bill[0]['total_fee']) ? number_format($bill[0]['total_fee'],2) : 0.00?></span>
+                            <hr>
+                            <div class="text-right mt-2 mb-2">
+                                <span style="font-weight: bolder; font-size: 20px;">Total Fees:</span> 
+                                <span class="total_fee" style="font-size: 20px;">P <?= !empty($bill[0]['total_fee']) ? number_format($bill[0]['total_fee'],2) : 0.00?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,3 +145,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>
