@@ -1,7 +1,7 @@
 <?php
 	
 	define('SERVERTYPE' , 'local');
-	define('URL', SERVERTYPE == 'local' ? '/childrensclinic_main/mobile/' : '/');
+	define('URL', SERVERTYPE == 'local' ? '/childrensclinic_main/mobile/' : '/mobile/');
 	
 	date_default_timezone_set('Asia/Taipei');
 	
