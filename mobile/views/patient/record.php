@@ -182,6 +182,7 @@
 <script>
     $(function(){
         $('.nav-link').click(function(){
+            var loader = '<div class="text-center"><i class="pe-7s-refresh-2 pe-spin pe-3x mt-4"></i></div>';
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
             var link = $(this).attr('data-link');
@@ -195,9 +196,12 @@
             } else if(link == 'othervaccine') {
                 urlLink = 'patient/othervaccine';
             }
+            $('.returnModule').html(loader);
             $.post(URL + urlLink, {'id' : patient_id})
             .done(function(returnData){
-                $('.returnModule').html(returnData);
+                setTimeout(function(){
+                    $('.returnModule').html(returnData);
+                }, 2000)
             })
         })
         $('input[name="birthday"]').blur(function(){

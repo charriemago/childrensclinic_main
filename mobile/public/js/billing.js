@@ -12,9 +12,13 @@ $(function(){
     });
     $('select[name="patient"]').change(function(){
         var id = $(this).val();
+        var loader = '<div class="text-center"><i class="pe-7s-refresh-2 pe-spin pe-3x mt-4"></i></div>';
+        $('.returnDetails').html(loader);
         $.post(URL + 'billing/details', {'id': id})
         .done(function(returnData){
-            $('.returnDetails').html(returnData);
+            setTimeout(function(){
+                $('.returnDetails').html(returnData);
+            }, 2000)
         })
     })
     $('.bill-vacc').change(function(){
