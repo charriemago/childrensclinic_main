@@ -133,8 +133,8 @@
                         <div class="col-sm-1">
                             <select class="form-control" name="blood_type">
                                 <option value="" required selected>Select Blood Type</option>
-                                <option value="0+">0+</option>
-                                <option value="0-">0-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
                                 <option value="A+">A+</option>
                                 <option value="A-">A-</option>
                                 <option value="B+">B+</option>

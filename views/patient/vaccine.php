@@ -11,7 +11,7 @@
                         <h5 class="float-left"> Vaccines </h5>
                     </div>
                     <div class="float-right">
-                        <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button>
+                        <!-- <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button> -->
                     </div>
                 </div><hr>
                 <div class="card card-standard">
@@ -46,12 +46,12 @@
                                             <td class="text-standard">
                                                 <strong><?=$vaccine['vaccine']?></strong>
                                             </td>      
-                                            <td><input type="datetime-local" class="form-control" name="1st[<?=$vaccine['id']?>]" value="<?=  $i1st != '' ? $i1st[0].'T'.$i1st[1] : ''?>"></td>      
-                                            <td><input type="datetime-local" class="form-control" name="2nd[<?=$vaccine['id']?>]" value="<?=  $i2nd != '' ? $i2nd[0].'T'.$i2nd[1] : ''?>"></td>      
-                                            <td><input type="datetime-local" class="form-control" name="3rd[<?=$vaccine['id']?>]" value="<?=  $i3rd != '' ? $i3rd[0].'T'.$i3rd[1] : ''?>"></td>      
-                                            <td><input type="datetime-local" class="form-control" name="Booster_1[<?=$vaccine['id']?>]" value="<?= $Booster1 != '' ? $Booster1[0].'T'.$Booster1[1] : ''?>"></td>      
-                                            <td><input type="datetime-local" class="form-control" name="Booster_2[<?=$vaccine['id']?>]" value="<?= $Booster2 != '' ? $Booster2[0].'T'.$Booster2[1] : ''?>"></td>      
-                                            <td><input type="datetime-local" class="form-control" name="Booster_3[<?=$vaccine['id']?>]" value="<?= $Booster3 != '' ? $Booster3[0].'T'.$Booster3[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="1st[<?=$vaccine['id']?>]" value="<?=  $i1st != '' ? $i1st[0].'T'.$i1st[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="2nd[<?=$vaccine['id']?>]" value="<?=  $i2nd != '' ? $i2nd[0].'T'.$i2nd[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="3rd[<?=$vaccine['id']?>]" value="<?=  $i3rd != '' ? $i3rd[0].'T'.$i3rd[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="Booster_1[<?=$vaccine['id']?>]" value="<?= $Booster1 != '' ? $Booster1[0].'T'.$Booster1[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="Booster_2[<?=$vaccine['id']?>]" value="<?= $Booster2 != '' ? $Booster2[0].'T'.$Booster2[1] : ''?>"></td>      
+                                            <td><input type="text" class="form-control" name="Booster_3[<?=$vaccine['id']?>]" value="<?= $Booster3 != '' ? $Booster3[0].'T'.$Booster3[1] : ''?>"></td>      
                                             <td><textarea class="form-control" name="reaction[<?=$vaccine['id']?>]" rows="2"><?= !empty($immune[0]) ? $immune[0]['reaction'] : '' ?></textarea></td>              
                                         </tr>
                                     <?php endforeach;?> 

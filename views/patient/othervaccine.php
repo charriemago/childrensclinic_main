@@ -11,7 +11,7 @@
                         <h5 class="float-left"> Other Vaccines </h5>
                     </div>
                     <div class="float-right">
-                    <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button>
+                    <!-- <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button> -->
                     </div>
                 </div><hr>
                 <div class="card card-standard">
@@ -36,7 +36,7 @@
                                        <td class="text-standard">
                                             <strong><?=$vaccine['fee_name']?></strong>
                                         </td>      
-                                        <td><input class="form-control" type="datetime-local" name="date_shot[<?=$vaccine['id']?>]" value="<?= $dateShot != '' ? $dateShot[0].'T'.$dateShot[1] : ''?>"></td>      
+                                        <td><input class="form-control" type="text" name="date_shot[<?=$vaccine['id']?>]" value="<?= $dateShot != '' ? $dateShot[0].'T'.$dateShot[1] : ''?>"></td>      
                                         <td><input class="form-control" type="text" name="reaction[<?=$vaccine['id']?>]" value="<?=$immune[0]['reaction']?>"></td>
                                     </tr>
                                 <?php endforeach;?>

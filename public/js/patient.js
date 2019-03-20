@@ -60,7 +60,7 @@ $(function(){
     });
 
     $('.update-trigger').click(function(){
-        $('input, textarea').prop('disabled', false);
+        $('input, textarea, select').prop('disabled', false);
         $('.btn-update').removeClass('d-none');
     })
     $('.btn-add').click(function(){

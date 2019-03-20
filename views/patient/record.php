@@ -2,7 +2,7 @@
     $patient = $this->patient;
     $vaccines = $this->vaccines;
     $delivery = array('Normal' => 'normal', 'Cesarean', 'cesarean');
-    $blood = array('0+','0-','A+','A-','B+','B-','AB+','AB-');
+    $blood = array('O+','O-','A+','A-','B+','B-','AB+','AB-');
 ?>
 <style>
     .nav-standard{
@@ -150,16 +150,6 @@
                             <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                             <div class="col-sm-3">
                                 <input type="text" disabled class="form-control" name="abdominal_circumference" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['abdominal_circumference'] : '' ?>">
-                            </div>
-                        </div> 
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-1 col-form-label">Diagnosis Notes</label>
-                            <div class="col-sm-5">
-                                <input required disabled type="text" class="form-control" name="diagnosis_notes" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['diagnosis_notes'] : '' ?>">
-                            </div>
-                             <label for="inputPassword" class="col-sm-1 col-form-label">Medication Notes</label>
-                            <div class="col-sm-5">
-                                <input required disabled type="text" class="form-control" name="medication_notes" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['medication_notes'] : '' ?>">
                             </div>
                         </div>
                         <hr>

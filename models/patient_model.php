@@ -141,8 +141,8 @@ class Patient_model extends Model
             'head_circumference' => isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '',
             'chest_circumference' => isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '',
             'abdominal_circumference' => isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '',
-            'diagnosis_notes' => isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '',
-            'medication_notes' => isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '',
+            // 'diagnosis_notes' => isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '',
+            // 'medication_notes' => isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '',
             'created_by' => $this->user['id']
         );
         $id = Db::insert(DATABASE_NAME, 'tbl_birth_history', $data);
