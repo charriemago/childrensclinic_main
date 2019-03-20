@@ -1,7 +1,8 @@
 <?php
     $patient = $this->patient;
     $vaccines = $this->vaccines;
-
+    $delivery = array('Normal' => 'normal', 'Cesarean', 'cesarean');
+    $blood = array('0+','0-','A+','A-','B+','B-','AB+','AB-');
 ?>
 <style>
     .nav-standard{
@@ -47,7 +48,7 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Birthday</label>
                             <div class="col-sm-5">
-                                <input type="text" disabled class="form-control" value="<?=$patient['birthday']?>" name="birthday" max="<?=date('Y-m-d')?>">
+                                <input type="date" disabled class="form-control" value="<?=$patient['birthday']?>" name="birthday" max="<?=date('Y-m-d')?>">
                             </div>
                         </div> 
                         <hr>
@@ -116,9 +117,14 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-1 col-form-label">Type of Delivery</label>
                             <div class="col-sm-5">
-                                <input type="text" disabled class="form-control" name="type_of_delivery" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['type_of_delivery'] : '' ?>">
+                                <select class="form-control" name="typeofdelivery" disabled>
+                                    <option value="" required selected>Select Type of Delivery</option>
+                                    <?php foreach($delivery as $key=>$each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['type_of_delivery'] == $each ? 'selected' : '' ?>><?= $key?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
-                            <label for="inputPassword" class="col-sm-1 col-form-label">Chest Circumference</label>
+                            <label for="inputPassword" class="col-sm1-1 col-form-label">Chest Circumference</label>
                             <div class="col-sm-5">
                                 <input type="text" disabled class="form-control" name="chest_circumference" value="<?= !empty($patient['birthHistory']) ? $patient['birthHistory']['chest_circumference'] : '' ?>">
                             </div>
@@ -134,7 +140,12 @@
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Blood Type</label>
                             <div class="col-sm-1">
-                                <input type="text" disabled class="form-control" name="blood_type" value="<?=!empty($patient['birthHistory']) ? $patient['birthHistory']['blood_type'] : '' ?>">
+                                <select class="form-control" name="blood_type" disabled>
+                                    <option value="" required selected>Select Blood Type</option>
+                                    <?php foreach($blood as $each): ?>
+                                    <option value="<?= $each?>" <?= $patient['birthHistory']['blood_type'] == $each ? 'selected' : '' ?>><?= $each?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <label for="inputPassword" class="col-sm-1 col-form-label">Abdominal Circumference</label>
                             <div class="col-sm-3">
@@ -189,5 +200,55 @@
                 $('.returnModule').html(returnData);
             })
         })
+        $('input[name="birthday"]').blur(function(){
+            var date = $(this).val();
+            var days = datediff(date,dateToday()) + 1;
+            var months = Math.floor(parseInt(days) * 0.0328767);
+            var weeks = Math.floor(parseInt(months) * 4.34524);
+            $('input[name="no_of_mos"]').val(months);
+            $('input[name="weeks"]').val(weeks);
+            $('input[name="days"]').val(days);
+        })
+        
+        function datediff(first, second) {
+            var first = first.split('-');
+            var second = second.split('-');
+            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date(first[0],first[1],first[2]);
+            var secondDate = new Date(second[0],second[1],second[2]);
+
+            var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+            return diffDays;
+        }
+        function dateToday(){
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            return d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
+            (day<10 ? '0' : '') + day;
+        }
+        // function humanise (diff) {
+        //     // The string we're working with to create the representation
+        //     var str = '';
+        //     // Map lengths of `diff` to different time periods
+        //     var values = [[' year', 365], [' month', 30], [' day', 1]];
+
+        //     // Iterate over the values...
+        //     for (var i=0;i<values.length;i++) {
+        //         var amount = Math.floor(diff / values[i][1]);
+
+        //         // ... and find the largest time value that fits into the diff
+        //         if (amount >= 1) {
+        //         // If we match, add to the string ('s' is for pluralization)
+        //         str += amount + values[i][0] + (amount > 1 ? 's' : '') + ' ';
+
+        //         // and subtract from the diff
+        //         diff -= amount * values[i][1];
+        //         }
+        //     }
+
+        //     return str;
+        // }
     })
 </script>

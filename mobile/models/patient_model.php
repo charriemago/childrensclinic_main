@@ -67,6 +67,7 @@ class Patient_model extends Model
                 $birth_history_id = $this->insertBirthHistory($patient_id);
                 if($birth_history_id > 0) {
                     $this->insertImmunizationRecord($patient_id);
+                    $this->insertOtherImmunizationRecord($patient_id);
                     echo json_encode([
                         'msg' => 'Record successfully saved'
                     ]);
@@ -89,26 +90,26 @@ class Patient_model extends Model
         //     echo 0;
         //     exit;
         // } 
-        foreach ($_POST['date_visit'] as $key => $each) {
-            $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
-            $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $date_visit, 'patient_id' => $patient_id));
+        // foreach ($_POST['date_visit'] as $key => $each) {
+        //     $date_visit = date('Y-m-d', strtotime($_POST['date_visit'][$key]));
+        //     $validate_visit = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('date_visit' => $date_visit, 'patient_id' => $patient_id));
             
-            if(empty($validate_visit)) {
+        //     if(empty($validate_visit)) {
 
-                $data = [
-                    'patient_id' => $patient_id,
-                    'age' => 0,
-                    'weight' => $_POST['weight'][$key],
-                    'height' => $_POST['height'][$key],
-                    'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
-                    'date_visit' => $date_visit,
-                    'date_next' => $_POST['date_nextvisit'][$key],
-                    'created_by' => $this->user['id'],
-                    'date_created' => date('Y-m-d H:i:s')
-                ];
-                DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
-            }
-        }
+        //         $data = [
+        //             'patient_id' => $patient_id,
+        //             'age' => 0,
+        //             'weight' => $_POST['weight'][$key],
+        //             'height' => $_POST['height'][$key],
+        //             'diagnosis_physician_notes' => $_POST['diagnosis'][$key],
+        //             'date_visit' => $date_visit,
+        //             'date_next' => $_POST['date_nextvisit'][$key],
+        //             'created_by' => $this->user['id'],
+        //             'date_created' => date('Y-m-d H:i:s')
+        //         ];
+        //         DB::insert(DATABASE_NAME, 'tbl_follow_up_visit', $data);
+        //     }
+        // }
     }
 
     public function insertParent($patientId) {
@@ -133,7 +134,7 @@ class Patient_model extends Model
             'no_of_mos' => isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '',
             'weeks' => isset($_POST['weeks']) ? $_POST['weeks'] : '',
             'days' => isset($_POST['days']) ? $_POST['days'] : '',
-            'type_of_delivery' => isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '',
+            'type_of_delivery' => isset($_POST['typeofdelivery']) ? $_POST['typeofdelivery'] : '',
             'birth_weight' => isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '',
             'birth_length' => isset($_POST['birth_length']) ? $_POST['birth_length'] : '',
             'blood_type' => isset($_POST['blood_type']) ? $_POST['blood_type'] : '',
@@ -154,16 +155,22 @@ class Patient_model extends Model
             $data = array(
                 'patient_id' => $patientId,
                 'vaccine_id' => $vaccine['id'],
-                '1st' => isset($_POST['1st'][$vaccine['id']]) ? 1 : 0,
-                '2nd' => isset($_POST['2nd'][$vaccine['id']]) ? 1 : 0,
-                '3rd' => isset($_POST['3rd'][$vaccine['id']]) ? 1 : 0,
-                'Booster_1' => isset($_POST['Booster_1'][$vaccine['id']]) ? 1 : 0,
-                'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0,
-                'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0,
-                'reaction' => $_POST['reaction'][$vaccine['id']],
+                'reaction' => '',
                 'created_by' => $this->user['id']
             );
             $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record', $data);
+        }
+    }
+    public function insertOtherImmunizationRecord($patientId) {
+        $vaccines = Db::loadAll(DATABASE_NAME, 'tbl_other_fee');
+        foreach($vaccines as $vaccine) {
+            $data = array(
+                'patient_id' => $patientId,
+                'other_fee_id' => $vaccine['id'],
+                'reaction' => '',
+                'created_by' => $this->user['id']
+            );
+            $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record_other', $data);
         }
     }
 
@@ -205,7 +212,7 @@ class Patient_model extends Model
             
             $this->updateParent($parent);
             $this->updateBirthHistory($birthHistory);
-            $this->updateImmunizationRecord($patient['id']); 
+            // $this->updateImmunizationRecord($patient['id']); 
                 
             echo json_encode([
                 'msg' => 'Record successfully saved'
@@ -253,7 +260,8 @@ class Patient_model extends Model
         Db::update(DATABASE_NAME, 'tbl_birth_history', $data, $where);
     }
 
-    public function updateImmunizationRecord($patientId) {
+    public function updateImmunizationRecord() {
+        $patientId = $_POST['patient_id'];
         $vaccines = Vaccine_model::all();
         foreach($vaccines as $vaccine) {
             $where1 = [
@@ -269,26 +277,26 @@ class Patient_model extends Model
                 ];
                 unset($data['id']);
 
-                $data['1st'] = isset($_POST['1st'][$vaccine['id']]) ? 1 : 0;
-                $data['2nd'] = isset($_POST['2nd'][$vaccine['id']]) ? 1 : 0;
-                $data['3rd'] = isset($_POST['3rd'][$vaccine['id']]) ? 1 : 0;
-                $data['Booster_1'] = isset($_POST['Booster_1'][$vaccine['id']]) ? 1 : 0;
-                $data['Booster_2'] = isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0;
-                $data['Booster_3'] = isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0;
-                $data['reaction'] = $_POST['reaction'][$vaccine['id']];
-                $data['modified_by'] = $this->user['id'];
-                $data['date_modified'] = date('Y-m-d H:i:s');
-                Db::update(DATABASE_NAME, 'tbl_immunization_record', $data, $where2);
+                $updateRecord['1st'] = isset($_POST['1st'][$vaccine['id']]) && $_POST['1st'][$vaccine['id']] != '' ? $_POST['1st'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['2nd'] = isset($_POST['2nd'][$vaccine['id']]) && $_POST['2nd'][$vaccine['id']] != '' ? $_POST['2nd'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['3rd'] = isset($_POST['3rd'][$vaccine['id']]) && $_POST['3rd'][$vaccine['id']] != '' ? $_POST['3rd'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_1'] = isset($_POST['Booster_1'][$vaccine['id']]) && $_POST['Booster_1'][$vaccine['id']] != '' ? $_POST['Booster_1'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_2'] = isset($_POST['Booster_2'][$vaccine['id']]) && $_POST['Booster_2'][$vaccine['id']] != '' ? $_POST['Booster_2'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['Booster_3'] = isset($_POST['Booster_3'][$vaccine['id']]) && $_POST['Booster_3'][$vaccine['id']] != '' ? $_POST['Booster_3'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['reaction'] = $_POST['reaction'][$vaccine['id']];
+                $updateRecord['modified_by'] = $this->user['id'];
+                $updateRecord['date_modified'] = date('Y-m-d H:i:s');
+                Db::update(DATABASE_NAME, 'tbl_immunization_record', $updateRecord, $where2);
             } else {
                 $data = array(
                     'patient_id' => $patientId,
                     'vaccine_id' => $vaccine['id'],
-                    '1st' => isset($_POST['1st'][$vaccine['id']]) ? 1 : 0,
-                    '2nd' => isset($_POST['2nd'][$vaccine['id']]) ? 1 : 0,
-                    '3rd' => isset($_POST['3rd'][$vaccine['id']]) ? 1 : 0,
-                    'Booster_1' => isset($_POST['Booster_1'][$vaccine['id']]) ? 1 : 0,
-                    'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) ? 1 : 0,
-                    'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) ? 1 : 0,
+                    '1st' => isset($_POST['1st'][$vaccine['id']]) && $_POST['1st'][$vaccine['id']] != '' ? $_POST['1st'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    '2nd' => isset($_POST['2nd'][$vaccine['id']]) && $_POST['2nd'][$vaccine['id']] != '' ? $_POST['2nd'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    '3rd' => isset($_POST['3rd'][$vaccine['id']]) && $_POST['3rd'][$vaccine['id']] != '' ? $_POST['3rd'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_1' => isset($_POST['Booster_1'][$vaccine['id']]) && $_POST['Booster_1'][$vaccine['id']] != '' ? $_POST['Booster_1'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_2' => isset($_POST['Booster_2'][$vaccine['id']]) && $_POST['Booster_2'][$vaccine['id']] != '' ? $_POST['Booster_2'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'Booster_3' => isset($_POST['Booster_3'][$vaccine['id']]) && $_POST['Booster_3'][$vaccine['id']] != '' ? $_POST['Booster_3'][$vaccine['id']] : '0000-00-00 00:00:00',
                     'reaction' => $_POST['reaction'][$vaccine['id']],
                     'created_by' => $this->user['id']
                 );
@@ -296,8 +304,61 @@ class Patient_model extends Model
             }
         }
     }
+    public function updateImmunizationRecordOther() {
+        $patientId = $_POST['patient_id'];
+        $vaccines = Db::loadAll(DATABASE_NAME, 'tbl_other_fee');
+        foreach($vaccines as $vaccine) {
+            $where1 = [
+                'patient_id' => $patientId,
+                'other_fee_id' => $vaccine['id'],
+            ];
+            $record = Db::selectByColumn(DATABASE_NAME, 'tbl_immunization_record_other', $where1);
+            if(!empty($record)) {
+                $data = $record[0];
+                $where2 = [
+                    'id' => $data['id']
+                ];
+                unset($data['id']);
+
+                $updateRecord['date_shot'] = isset($_POST['date_shot'][$vaccine['id']]) && $_POST['date_shot'][$vaccine['id']] != '' ? $_POST['date_shot'][$vaccine['id']] : '0000-00-00 00:00:00';
+                $updateRecord['reaction'] = $_POST['reaction'][$vaccine['id']];
+                $updateRecord['modified_by'] = $this->user['id'];
+                $updateRecord['date_modified'] = date('Y-m-d H:i:s');
+                Db::update(DATABASE_NAME, 'tbl_immunization_record_other', $updateRecord, $where2);
+            } else {
+                $data = array(
+                    'patient_id' => $patientId,
+                    'other_fee_id' => $vaccine['id'],
+                    'date_shot' => isset($_POST['date_shot'][$vaccine['id']]) && $_POST['date_shot'][$vaccine['id']] != '' ? $_POST['date_shot'][$vaccine['id']] : '0000-00-00 00:00:00',
+                    'reaction' => $_POST['reaction'][$vaccine['id']],
+                    'created_by' => $this->user['id']
+                );
+                $id = Db::insert(DATABASE_NAME, 'tbl_immunization_record_other', $data);
+            }
+        }
+    }
     public function allVisits($id) {
         $data = DB::selectByColumn(DATABASE_NAME, 'tbl_follow_up_visit', array('patient_id' => $id));
         return $data;
+    }
+    public function getMedication() {
+        $data = DB::selectByColumn(DATABASE_NAME, 'tbl_medication', array('patient_id' => $_POST['id']));
+        return $data;
+    }
+    public function getVaccine() {
+        $data = DB::selectByColumn(DATABASE_NAME, 'tbl_immunization_record', array('patient_id' => $_POST['id']));
+        return $data;
+    }
+    public function addMedication() {
+        DB::delete(DATABASE_NAME, 'tbl_medication', array('patient_id' => $_POST['patient_id']));
+        foreach($_POST['date_of_prescription'] as $key=> $each){
+            $data = array(
+                'patient_id' => $_POST['patient_id'],
+                'date_of_prescription' => $each,
+                'prescription' => $_POST['prescription'][$key],
+                'created_by' => $this->user['id']
+            );
+            $id = Db::insert(DATABASE_NAME, 'tbl_medication', $data);
+        }
     }
 }

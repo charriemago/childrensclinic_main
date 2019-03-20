@@ -11,7 +11,6 @@
      name='viewport' 
      content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' 
 />
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 	<link rel="stylesheet" href="<?=URL?>public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?=URL?>public/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?= URL;?>public/pe-icon/css/pe-icon-7-stroke.css" />
@@ -30,12 +29,12 @@
 		const URL = '<?=URL?>';
 	</script>
 
-	<script>
-		window.onload = () => {
-    	let el = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
-    	el.parentNode.removeChild(el);
-	}
-	</script>
+		<script>
+			window.onload = () => {
+	    	let el = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
+	    	el.parentNode.removeChild(el);
+		}
+		</script>
 </head>
 
 <body>
@@ -54,6 +53,9 @@
 				<li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>patient">Patient Record</a>
 				</li>
+				 <li class="nav-item">
+					<a class="nav-link text-standard" href="<?= URL?>followup">Follow up Visit</a>
+				</li> 
 				<li class="nav-item">
 					<a class="nav-link text-standard" href="<?= URL?>billing">Payment</a>
 				</li>
@@ -72,7 +74,7 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="<?= URL?>vaccine">Vaccines Fee</a>
 						<a class="dropdown-item" href="<?= URL?>fee">Consultation Fee</a>
-						<a class="dropdown-item" href="<?= URL?>fee/other">Others Fee</a>
+						<a class="dropdown-item" href="<?= URL?>fee/other">Other Vaccinces Fee</a>
 					</div>
 				</li>
 			</ul>

@@ -11,6 +11,7 @@ $(function(){
         validateForm("Are you sure you want to add this data?" , function() {
             $.post(URL+'patient/save', form)
             .done( data => {
+                alert(data);
                 let {msg} = JSON.parse(data);
                 alert(msg);
                 location.href = URL+'patient';

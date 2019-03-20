@@ -41,6 +41,16 @@ class Fee_model extends Model
             "date_created" => date('Y-m-d H:i:s') 
         );
         $id = Db::insert(DATABASE_NAME, 'tbl_other_fee', $data);
+        $patients = Db::loadAll(DATABASE_NAME, 'tbl_patient');
+        foreach($patients as $each){
+            $data = array(
+                'patient_id' => $each['id'],
+                'other_fee_id' => $id,
+                'reaction' => '',
+                'created_by' => $this->user['id']
+            );
+            Db::insert(DATABASE_NAME, 'tbl_immunization_record_other', $data);
+        }
     }
     public function updateOther(){
         $data = array(

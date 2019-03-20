@@ -32,6 +32,10 @@ class Billing extends Controller
 	public function saveBill(){
 		$this->model->saveBill();
 	}
+	public function details(){
+		$this->view->vaccines = Vaccine_model::all();
+		$this->view->render('views/billing/details.php', true);
+	}
 
 }
 

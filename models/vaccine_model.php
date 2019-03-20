@@ -31,6 +31,16 @@ class Vaccine_model extends Model
             "date_created" => date('Y-m-d H:i:s') 
         );
         Db::insert(DATABASE_NAME, 'tbl_vaccine_bill', $data2);
+        $patients = Db::loadAll(DATABASE_NAME, 'tbl_patient');
+        foreach($patients as $each){
+            $data = array(
+                'patient_id' => $each['id'],
+                'vaccine_id' => $id,
+                'reaction' => '',
+                'created_by' => $this->user['id']
+            );
+            Db::insert(DATABASE_NAME, 'tbl_immunization_record', $data);
+        }
     }
     public function update(){
         $data = array(
