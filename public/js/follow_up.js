@@ -23,8 +23,8 @@ function addNewLine() {
             <tr>
                 <td><input class="form-control" type="datetime-local" name="date_visit[]" required></td>      
                 <td><input class="form-control" type="datetime-local" name="date_nextvisit[]"></td>
-                <td><input class="form-control" type="text" name="weight[]"></td>      
-                <td><input class="form-control" type="text" name="height[]"></td>      
+                <td><input class="form-control" type="number" name="weight[]"></td>      
+                <td><input class="form-control" type="number" name="height[]"></td>      
                 <td><input class="form-control" type="text" name="diagnosis[]"></td>
                 <td><a class="btn-delete"><i class="ti-trash text-danger"></i></a></td>
             </tr>
