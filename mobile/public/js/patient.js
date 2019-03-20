@@ -1,11 +1,11 @@
 $(function(){
-    $('input[name="no_of_mos"]').keyup(function(){
-        var value = $(this).val();
-        var week = Math.ceil(value * 4.34524);
-        $('input[name="weeks"]').val(week);
-        var day = week * 7;
-        $('input[name="days"]').val(day);
-    })
+    // $('input[name="no_of_mos"]').keyup(function(){
+    //     var value = $(this).val();
+    //     var week = Math.ceil(value * 4.34524);
+    //     $('input[name="weeks"]').val(week);
+    //     var day = week * 7;
+    //     $('input[name="days"]').val(day);
+    // })
     $('#addPatientForm').submit(function(){
         let form = $(this).serialize();
         validateForm("Are you sure you want to add this data?" , function() {
@@ -35,7 +35,7 @@ $(function(){
                 .done( data => {
                     let {msg} = JSON.parse(data);
                     alert(msg);
-                    location.href = URL+'patient';
+                    location.reload();
                 })
                 .fail ( err_data => {
                     let err = JSON.parse(err_data.responseText);
@@ -61,7 +61,8 @@ $(function(){
     });
 
     $('.update-trigger').click(function(){
-        $('input, textarea').prop('disabled', false);
+        $('input[name="diagnosis_notes"]').prop('disabled', false);
+        $('input[name="medication_notes"]').prop('disabled', false);
         $('.btn-update').removeClass('d-none');
     })
     $('.btn-add').click(function(){

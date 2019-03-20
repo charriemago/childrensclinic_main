@@ -32,7 +32,7 @@
                             <label class="col-sm-2 col-form-label">Patient Name</label>
                             <div class="col-sm-10">
                                 <input type="text" disabled class="form-control" name="patient_name" value="<?=$patient['patient_name']?>">
-                                <input type="hidden" disabled class="form-control" name="patient_id" value="<?=$patient['id']?>">
+                                <input type="hidden" readonly class="form-control" name="patient_id" value="<?=$patient['id']?>">
                             </div>
                         </div>
                         <div class="form-group row">

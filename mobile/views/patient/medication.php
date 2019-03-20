@@ -11,43 +11,34 @@
                         <h5 class="float-left"> Medication </h5>
                     </div>
                     <div class="float-right">
-                        <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
-                        <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button>
+                        <!-- <button type="button" class="btn btn-standard-success btn-add-line"><i class="pe-7s-plus pe-lg"></i> Add Line</button>
+                        <button type="submit" class="btn btn-standard-success"><i class="pe-7s-paper-plane pe-lg"></i> Submit</button> -->
                     </div>
                 </div><hr>
-                <div class="card card-standard">
-                    <div class="card-body">
-                        <h6 style="font-weight: 700">Records</h6>
-                        <div class="table-responsive">
-                            <table id="table-medication" class="table table-pad table-striped table-hover table-standard">
-                                <thead>
-                                    <tr>
-                                    
-                                        <th>Date of Prescription</th>                  
-                                        <!-- <th>Age</th>    -->                                  
-                                        <th>Prescription of Doctor/Physicians</th>                                     
-                                        <th></th>                                     
-                                    </tr>   
-                                </thead>
-                                <tbody>
-                                    <?php foreach($medication as $each): ?>
-                                        <?php $datePres = explode(" ",$each['date_of_prescription']); ?>
-                                    <tr>
-                                        <td><input class="form-control" type="datetime-local" name="date_of_prescription[]" value="<?= $datePres[0].'T'.$datePres[1]?>" required="required"></td>      
-                                        <td><input class="form-control" type="text" name="prescription[]" value="<?= $each['prescription']?>" required="required"></td>
-                                        <td></td>
-                                    </tr>
-                
-                                    <?php endforeach; ?>
-                                    <tr>
-                                        <td><input class="form-control" type="datetime-local" name="date_of_prescription[]" required="required"></td>      
-                                        <td><input class="form-control" type="text" name="prescription[]" required="required"></td>
-                                        <td><a class="btn-delete"><i class="ti-trash text-danger" style="cursor: pointer"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <h6 style="font-weight: 700">Records</h6>
+                <div class="table-responsive">
+                    <table id="table-medication" class="table table-pad table-striped table-hover table-standard">
+                        <thead>
+                            <tr>
+                            
+                                <th>Date of Prescription</th>                  
+                                <!-- <th>Age</th>    -->                                  
+                                <th>Prescription of Doctor/Physicians</th>                                     
+                                <th></th>                                     
+                            </tr>   
+                        </thead>
+                        <tbody>
+                            <?php foreach($medication as $each): ?>
+                                <?php $datePres = explode(" ",$each['date_of_prescription']); ?>
+                            <tr>
+                                <td><input class="form-control" type="datetime-local" name="date_of_prescription[]" disabled value="<?= $datePres[0].'T'.$datePres[1]?>" required="required"></td>      
+                                <td><input class="form-control" type="text" name="prescription[]" disabled value="<?= $each['prescription']?>" required="required"></td>
+                                <td></td>
+                            </tr>
+        
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
              </form>
         </div>

@@ -175,15 +175,15 @@ class Patient_model extends Model
     }
 
     public function update() {
-        $check =  $this->checkName($_POST['patient_name']);
+        // $check =  $this->checkName($_POST['patient_name']);
         
-        if(!empty($check)) {
-            if($check[0]['id'] != $_POST['patient_id']) {
-                echo json_encode(['msg' => 'Patient has already saved on our records.']);
-                http_response_code(400);
-                exit;
-            }
-        }
+        // if(!empty($check)) {
+        //     if($check[0]['id'] != $_POST['patient_id']) {
+        //         echo json_encode(['msg' => 'Patient has already saved on our records.']);
+        //         http_response_code(400);
+        //         exit;
+        //     }
+        // }
 
         $patient = $this->info($_POST['patient_id']);
         
@@ -192,25 +192,25 @@ class Patient_model extends Model
                 'id' => $patient['id']
             ];
 
-            $parent = $patient['parent'];
-            unset($patient['parent']);
+            // $parent = $patient['parent'];
+            // unset($patient['parent']);
             
             $birthHistory = $patient['birthHistory'];
             unset($patient['birthHistory']);
             
-            $data = $patient;
-            unset($data['id']);
+            // $data = $patient;
+            // unset($data['id']);
         
-            $data['patient_name'] = $_POST['patient_name'];
-            $data['address'] = $_POST['address'];
-            $data['gender'] = $_POST['gender'];
-            $data['guardian_name'] = $_POST['guardian_name'];
-            $data['contact_no'] = $_POST['contact_no'];
-            $data['birthday'] = $_POST['birthday'];
-            $data['modified_by'] = $this->user['id'];
-            Db::update(DATABASE_NAME, $this->table, $data, $where);
+            // $data['patient_name'] = $_POST['patient_name'];
+            // $data['address'] = $_POST['address'];
+            // $data['gender'] = $_POST['gender'];
+            // $data['guardian_name'] = $_POST['guardian_name'];
+            // $data['contact_no'] = $_POST['contact_no'];
+            // $data['birthday'] = $_POST['birthday'];
+            // $data['modified_by'] = $this->user['id'];
+            // Db::update(DATABASE_NAME, $this->table, $data, $where);
             
-            $this->updateParent($parent);
+            // $this->updateParent($parent);
             $this->updateBirthHistory($birthHistory);
             // $this->updateImmunizationRecord($patient['id']); 
                 
@@ -241,17 +241,17 @@ class Patient_model extends Model
         ]; 
         unset($data['id']);
 
-        $data['term'] = isset($_POST['term']) ? $_POST['term'] : '';
-        $data['no_of_mos'] = isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '';
-        $data['weeks'] = isset($_POST['weeks']) ? $_POST['weeks'] : '';
-        $data['days'] = isset($_POST['days']) ? $_POST['days'] : '';
-        $data['type_of_delivery'] = isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '';
-        $data['birth_weight'] = isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '';
-        $data['birth_length'] = isset($_POST['birth_length']) ? $_POST['birth_length'] : '';
-        $data['blood_type'] = isset($_POST['blood_type']) ? $_POST['blood_type'] : '';
-        $data['head_circumference'] = isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '';
-        $data['chest_circumference'] = isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '';
-        $data['abdominal_circumference'] = isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '';
+        // $data['term'] = isset($_POST['term']) ? $_POST['term'] : '';
+        // $data['no_of_mos'] = isset($_POST['no_of_mos']) ? $_POST['no_of_mos'] : '';
+        // $data['weeks'] = isset($_POST['weeks']) ? $_POST['weeks'] : '';
+        // $data['days'] = isset($_POST['days']) ? $_POST['days'] : '';
+        // $data['type_of_delivery'] = isset($_POST['type_of_delivery']) ? $_POST['type_of_delivery'] : '';
+        // $data['birth_weight'] = isset($_POST['birth_weight']) ? $_POST['birth_weight'] : '';
+        // $data['birth_length'] = isset($_POST['birth_length']) ? $_POST['birth_length'] : '';
+        // $data['blood_type'] = isset($_POST['blood_type']) ? $_POST['blood_type'] : '';
+        // $data['head_circumference'] = isset($_POST['head_circumference']) ? $_POST['head_circumference'] : '';
+        // $data['chest_circumference'] = isset($_POST['chest_circumference']) ? $_POST['chest_circumference'] : '';
+        // $data['abdominal_circumference'] = isset($_POST['abdominal_circumference']) ? $_POST['abdominal_circumference'] : '';
         $data['diagnosis_notes'] = isset($_POST['diagnosis_notes']) ? $_POST['diagnosis_notes'] : '';
         $data['medication_notes'] = isset($_POST['medication_notes']) ? $_POST['medication_notes'] : '';
         $data['modified_by'] = $this->user['id'];
